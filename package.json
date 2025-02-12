@@ -1,0 +1,24 @@
+{
+  "name": "codebridge",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/generator": "^7.26.8",
+    "@babel/parser": "^7.26.8",
+    "@babel/traverse": "^7.26.8",
+    "@babel/types": "^7.26.8",
+    "parse5": "^7.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.8",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.6",
+    "@types/parse5": "^6.0.3"
+  }
+}
