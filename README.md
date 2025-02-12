@@ -122,7 +122,7 @@ MIT
 ## 작성자
 
 Seungwoo Hong, Claude-3.5-sonnet
-
+https://claude.ai/chat/05e59138-b97e-4efa-a05c-af3088c0b0b4
 ## 지원
 
 이슈나 문의사항이 있으시면 GitHub Issues에 등록해 주세요.
