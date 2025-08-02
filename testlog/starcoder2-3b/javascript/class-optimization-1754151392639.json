@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:16:32.639Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "class-optimization",
+  "task": "Add off method, once method, and error handling",
+  "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+  "rawResponse": "\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index !== -1) {\n      this.events[event].splice(index, 1);\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n  \n  once(event, callback) {\n    function wrapper() {\n      const result = callback();\n\n      this.off(event, wrapper);\n      \n      return result;\n    };\n\n    this.on(event, wrapper);\n  }\n\n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n}\n```",
+  "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index !== -1) {\n      this.events[event].splice(index, 1);\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n  \n  once(event, callback) {\n    function wrapper() {\n      const result = callback();\n\n      this.off(event, wrapper);\n      \n      return result;\n    };\n\n    this.on(event, wrapper);\n  }\n\n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n}",
+  "duration": 2698,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "score": 0.7,
+    "rawScore": 0.7,
+    "maxScore": 1
+  },
+  "error": null
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:15:26.026Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "class-optimization",
+  "task": "Add off method, once method, and error handling",
+  "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+  "rawResponse": "Here is your updated class with added `off`, `once` methods and some basic error handling:\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event] = this.events[event].filter(cb => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      callback.apply(null, arguments);\n      self.off(event, fn);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) this.events[event] = [];\n    \n    this.events[event].push(fn);\n  }\n  \n  emit(event, data) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}\n```\nThis updated class now includes the following features:\n1. `off` method to remove specific callback function from a given event.\n2. `once` method to add an event listener that will be triggered only once before being removed automatically.\n3. Throws TypeError when invalid arguments are provided for methods like on, off and emit.\n4. If no such event exists while emitting or removing it does nothing (no error thrown).\n",
+  "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event] = this.events[event].filter(cb => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      callback.apply(null, arguments);\n      self.off(event, fn);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) this.events[event] = [];\n    \n    this.events[event].push(fn);\n  }\n  \n  emit(event, data) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}",
+  "duration": 12378,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "score": 0.7,
+    "rawScore": 0.7,
+    "maxScore": 1
+  },
+  "error": null
+}

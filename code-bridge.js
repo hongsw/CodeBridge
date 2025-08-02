@@ -384,10 +384,92 @@ class CodeBridge {
       case 'html':
         return this.processHTML(originalCode, snippetCode);
       case 'js':
+      case 'javascript':
         return this.processJS(originalCode, snippetCode);
+      case 'css':
+        return this.processCSS(originalCode, snippetCode);
       default:
         throw new Error(`Unsupported file type: ${fileType}`);
     }
+  }
+
+  /**
+   * CSS 코드 처리
+   */
+  processCSS(originalCode, snippetCode) {
+    console.log('🎨 CSS 코드 처리 시작');
+    
+    if (!snippetCode || snippetCode.trim() === '') {
+      console.log('📝 빈 CSS 스니펫, 원본 반환');
+      return originalCode;
+    }
+
+    try {
+      // CSS는 단순 병합으로 처리 (덮어쓰기)
+      // 향후 CSS 파서를 추가할 수 있음
+      const processed = this.mergeCSS(originalCode, snippetCode);
+      console.log('✅ CSS 처리 완료');
+      return processed;
+    } catch (error) {
+      console.error('CSS 처리 오류:', error.message);
+      // 오류 발생시 향상된 스니펫 반환
+      return snippetCode;
+    }
+  }
+
+  /**
+   * CSS 병합 로직
+   */
+  mergeCSS(originalCSS, newCSS) {
+    // 기본적으로 새로운 CSS로 대체
+    // 실제 프로젝트에서는 더 정교한 병합 로직 필요
+    
+    if (!originalCSS || originalCSS.trim() === '') {
+      return newCSS;
+    }
+
+    // 선택자 기반 병합 (간단한 구현)
+    const originalSelectors = this.extractCSSSelectors(originalCSS);
+    const newSelectors = this.extractCSSSelectors(newCSS);
+    
+    let merged = originalCSS;
+    
+    for (const [selector, rules] of Object.entries(newSelectors)) {
+      if (originalSelectors[selector]) {
+        // 기존 선택자 교체
+        const selectorRegex = new RegExp(`${this.escapeRegex(selector)}\\s*\\{[^}]*\\}`, 'g');
+        merged = merged.replace(selectorRegex, `${selector} {\n${rules}\n}`);
+      } else {
+        // 새 선택자 추가
+        merged += `\n\n${selector} {\n${rules}\n}`;
+      }
+    }
+    
+    return merged;
+  }
+
+  /**
+   * CSS 선택자 추출
+   */
+  extractCSSSelectors(css) {
+    const selectors = {};
+    const regex = /([^{}]+)\{([^}]*)\}/g;
+    let match;
+    
+    while ((match = regex.exec(css)) !== null) {
+      const selector = match[1].trim();
+      const rules = match[2].trim();
+      selectors[selector] = rules;
+    }
+    
+    return selectors;
+  }
+
+  /**
+   * 정규식 이스케이프
+   */
+  escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 }
 

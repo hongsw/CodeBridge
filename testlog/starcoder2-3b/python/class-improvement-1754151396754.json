@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:16:36.754Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "scenario": "class-improvement",
+  "task": "Add empty check, peek method, size property, and type hints",
+  "originalCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+  "rawResponse": "\n\n```python\nfrom typing import List\n\n\nclass Stack(List):\n    def __init__(self) -> None:\n        self._items = []\n\n    @property\n    def size(self) -> int:\n        return len(self.items)\n    \n    @property\n    def items(self) -> list[int]:\n        return self._items\n\n    def push(self, item: int):\n        self._items.append(item)\n    \n    def pop(self) -> int | None:\n        if not self._items:\n            raise IndexError('Stack is empty')\n\n        return self._items[-1]\n```\n",
+  "improvedCode": "from typing import List\n\n\nclass Stack(List):\n    def __init__(self) -> None:\n        self._items = []\n\n    @property\n    def size(self) -> int:\n        return len(self.items)\n    \n    @property\n    def items(self) -> list[int]:\n        return self._items\n\n    def push(self, item: int):\n        self._items.append(item)\n    \n    def pop(self) -> int | None:\n        if not self._items:\n            raise IndexError('Stack is empty')\n\n        return self._items[-1]",
+  "duration": 1495,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "hasErrorHandling": true,
+    "score": 0.6666666666666667,
+    "rawScore": 0.8,
+    "maxScore": 1.2
+  },
+  "error": null
+}

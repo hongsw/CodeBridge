@@ -1,14 +1,15 @@
 # CodeBridge 🌉
 
 [![성공률](https://img.shields.io/badge/성공률-76.9%25-brightgreen)]()
-[![지원언어](https://img.shields.io/badge/지원언어-4개-blue)]()
+[![지원언어](https://img.shields.io/badge/지원언어-6개-blue)]()
+[![웹지원](https://img.shields.io/badge/웹기술-HTML%2FCSS%2FJS-success)]()
 [![응답속도](https://img.shields.io/badge/응답속도-5.9초-orange)]()
 [![비용절약](https://img.shields.io/badge/연간절약-$47K--94K-gold)]()
 [![라이선스](https://img.shields.io/badge/라이선스-MIT-green)]()
 
-**차세대 AI 기반 로컬 코드 통합 플랫폼**
+**🌟 완전한 풀스택 AI 코딩 플랫폼**
 
-CodeBridge는 AST(Abstract Syntax Tree) 기반으로 다중 언어 코드를 지능적으로 병합하는 혁신적인 도구입니다. **Ollama 로컬 LLM**과 통합하여 **100% 프라이버시 보장**과 **무제한 무료 사용**을 제공합니다.
+CodeBridge는 AST(Abstract Syntax Tree) 기반으로 **6개 언어**(JavaScript, Python, Rust, C++, HTML, CSS)를 지능적으로 병합하는 혁신적인 도구입니다. **Ollama 로컬 LLM**과 통합하여 **100% 프라이버시 보장**과 **무제한 무료 사용**을 제공합니다.
 
 ## 🏆 입증된 성과
 
@@ -19,14 +20,15 @@ CodeBridge는 AST(Abstract Syntax Tree) 기반으로 다중 언어 코드를 지
 - **💰 비용 절약**: 연간 $47,640-$94,200 (팀당)
 - **🔒 보안**: 100% 로컬 처리, 코드 외부 유출 없음
 
-### 🌍 다중 언어 지원 현황
+### 🌍 완전한 다중 언어 지원 현황
 | 언어 | 성공률 | 응답속도 | 특징 |
 |------|--------|----------|------|
 | **JavaScript** | 100% ✅ | 8.4초 | 완벽한 에러 처리, 모던 문법 |
 | **Python** | 100% ✅ | 6.2초 | 타입 힌트, 독스트링, 메모이제이션 |
 | **Rust** | 67% ⚠️ | 3.6초 | Result 타입, 안전한 에러 처리 |
 | **C++** | 100% ✅ | 7.2초 | RAII, 스마트 포인터, 모던 C++ |
-| **웹 기술** | 0% 🔧 | - | 개발 중 (HTML/CSS/JS 통합) |
+| **🎉 HTML** | **100% ✅** | 7.5초 | **ARIA 접근성, 시맨틱 마크업** |
+| **🎉 CSS** | **100% ✅** | 7.1초 | **Flexbox/Grid, 반응형 디자인** |
 
 ## 🚀 핵심 혁신 기능
 
@@ -152,6 +154,34 @@ const result = await ollamaCodeBridge.improveCode(
 );
 
 // 결과: 메모이제이션, 타입 힌트, 상세한 독스트링이 추가된 최적화된 함수
+```
+
+#### 🎉 새로운 웹 기술 지원
+```javascript
+// HTML 접근성 개선
+const htmlCode = `<form>
+  <input type="text" placeholder="Email">
+  <button>Login</button>
+</form>`;
+
+const result = await ollamaCodeBridge.improveCode(
+  htmlCode, 
+  "Add proper labels, ARIA attributes, and semantic HTML",
+  { fileType: 'html' }
+);
+
+// 결과: 완전한 ARIA 접근성과 시맨틱 HTML이 적용된 폼
+
+// CSS 반응형 변환
+const cssCode = `.container { width: 1200px; margin: 0 auto; }`;
+
+const result = await ollamaCodeBridge.improveCode(
+  cssCode, 
+  "Make responsive with flexbox and mobile-first approach",
+  { fileType: 'css' }
+);
+
+// 결과: Flexbox 기반 완전 반응형 레이아웃
 ```
 
 ### 4. 기존 CodeBridge 기능 (AST 병합)

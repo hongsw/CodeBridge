@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T16:19:32.828Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "web",
+  "scenario": "html-accessibility",
+  "task": "Add proper labels, ARIA attributes, and semantic HTML",
+  "originalCode": "<form>\n  <input type=\"text\" placeholder=\"Email\">\n  <input type=\"password\" placeholder=\"Password\">\n  <button>Login</button>\n</form>",
+  "rawResponse": "Here is your updated code:\n\n```javascript\n<form action=\"#\" aria-label=\"Login Form\">\n  <div>\n    <label for=\"email\">Email</label>\n    <input type=\"text\" id=\"email\" placeholder=\"Enter email address\" required aria-required=\"true\">\n  </div>\n  \n  <div>\n    <label for=\"password\">Password</label>\n    <input type=\"password\" id=\"password\" placeholder=\"Enter password\" required aria-required=\"true\">\n  <<｜begin▁of▁sentence｜>aria-describedby=\"pwd-hint\"",
+  "improvedCode": "<input type=\"text\" id=\"email\" placeholder=\"Enter email address\" required aria-required=\"true\">\n  </div>",
+  "duration": 3887,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasAccessibility": true,
+    "score": 0.42857142857142866,
+    "rawScore": 0.6000000000000001,
+    "maxScore": 1.4
+  },
+  "error": null
+}

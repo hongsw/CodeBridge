@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-02T16:18:28.373Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "async-error-handling",
+  "task": "Add comprehensive error handling and retry logic",
+  "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+  "rawResponse": "Here's how you can improve this function with a retry mechanism using async/await in JavaScript:\n\n```javascript\nasync function fetchUserData(userId, maxRetries = 3) {\n    if (!userId) throw new Error('User ID required');\n    \n    for (let i = 0; i < maxRetries; i++) {\n        try {\n            const response = await fetch('/api/users/' + userId);\n            \n            // If the response is not ok, an error will be thrown\n            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);\n        \n            const data = await response.json();\n            return data;\n        } catch (error) {\n            console.log('Fetch failed with error: ', error, `Retrying... Attempt #${i+1} of ${maxRetries}`);\n            \n            // Wait for a bit before retrying to avoid flooding the server\n            await new Promise(resolve => setTimeout(resolve, 200 * (i + 1)));\n        }\n    }\n    \n    throw new Error('Failed to fetch user data after ' + maxRetries + ' attempts');\n}\n```\nIn this code:\n- We added a `maxRetries` parameter to control the number of retries. The default is 3.\n- If fetching fails, we log the error and wait for some time before retrying. This avoids flooding the server with requests in case of temporary network issues or server overload.\n- After all attempts, if still failing, an error will be thrown indicating that the operation failed after a certain number of retries.\n",
+  "improvedCode": "async function fetchUserData(userId, maxRetries = 3) {\n    if (!userId) throw new Error('User ID required');\n    \n    for (let i = 0; i < maxRetries; i++) {\n        try {\n            const response = await fetch('/api/users/' + userId);\n            \n            // If the response is not ok, an error will be thrown\n            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);\n        \n            const data = await response.json();\n            return data;\n        } catch (error) {\n            console.log('Fetch failed with error: ', error, `Retrying... Attempt #${i+1} of ${maxRetries}`);\n            \n            // Wait for a bit before retrying to avoid flooding the server\n            await new Promise(resolve => setTimeout(resolve, 200 * (i + 1)));\n        }\n    }\n    \n    throw new Error('Failed to fetch user data after ' + maxRetries + ' attempts');\n}",
+  "duration": 9336,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "hasAsync": true,
+    "taskCompleted": true,
+    "score": 1,
+    "rawScore": 1,
+    "maxScore": 1
+  },
+  "error": null
+}

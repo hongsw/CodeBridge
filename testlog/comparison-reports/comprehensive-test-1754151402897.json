@@ -1,0 +1,649 @@
+{
+  "executionTime": "2025-08-02T16:16:42.897Z",
+  "totalDuration": 103393,
+  "totalTests": 26,
+  "models": [
+    "deepseek-coder:6.7b",
+    "starcoder2:3b"
+  ],
+  "languages": [
+    "javascript",
+    "python",
+    "rust",
+    "cpp",
+    "web"
+  ],
+  "modelStats": {
+    "deepseek-coder:6.7b": {
+      "total": 13,
+      "success": 10,
+      "languages": {
+        "javascript": {
+          "total": 3,
+          "success": 3
+        },
+        "python": {
+          "total": 3,
+          "success": 3
+        },
+        "rust": {
+          "total": 3,
+          "success": 1
+        },
+        "cpp": {
+          "total": 2,
+          "success": 2
+        },
+        "web": {
+          "total": 2,
+          "success": 1
+        }
+      },
+      "totalDuration": 87844,
+      "qualityScores": [
+        0.5,
+        1,
+        0.7,
+        0.5833333333333334,
+        0.8333333333333334,
+        0.6666666666666667,
+        0.7692307692307692,
+        0.5384615384615384,
+        0.6153846153846154,
+        0.642857142857143
+      ]
+    },
+    "starcoder2:3b": {
+      "total": 13,
+      "success": 4,
+      "languages": {
+        "javascript": {
+          "total": 3,
+          "success": 1
+        },
+        "python": {
+          "total": 3,
+          "success": 2
+        },
+        "rust": {
+          "total": 3,
+          "success": 1
+        },
+        "cpp": {
+          "total": 2,
+          "success": 0
+        },
+        "web": {
+          "total": 2,
+          "success": 0
+        }
+      },
+      "totalDuration": 15492,
+      "qualityScores": [
+        0.7,
+        0.8333333333333334,
+        0.6666666666666667,
+        0.6923076923076924
+      ]
+    }
+  },
+  "languageStats": {
+    "javascript": {
+      "total": 6,
+      "success": 4,
+      "models": {}
+    },
+    "python": {
+      "total": 6,
+      "success": 5,
+      "models": {}
+    },
+    "rust": {
+      "total": 6,
+      "success": 2,
+      "models": {}
+    },
+    "cpp": {
+      "total": 4,
+      "success": 2,
+      "models": {}
+    },
+    "web": {
+      "total": 4,
+      "success": 1,
+      "models": {}
+    }
+  },
+  "detailedResults": [
+    {
+      "timestamp": "2025-08-02T16:15:06.815Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "javascript",
+      "scenario": "basic-validation",
+      "task": "Add zero division check and type validation",
+      "originalCode": "function divide(a, b) {\n  return a / b;\n}",
+      "rawResponse": "Here is your updated function with added checks for zero division and type validation:\n\n```javascript\nfunction divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') throw new TypeError('Both arguments must be of type number');\n  if (b === 0) throw new Error('Division by zero is not allowed');\n  return a / b;\n}\n```\n",
+      "improvedCode": "function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') throw new TypeError('Both arguments must be of type number');\n  if (b === 0) throw new Error('Division by zero is not allowed');\n  return a / b;\n}",
+      "duration": 7313,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasErrorHandling": true,
+        "score": 0.5,
+        "rawScore": 0.5,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:13.628Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "javascript",
+      "scenario": "async-error-handling",
+      "task": "Add comprehensive error handling and retry logic",
+      "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+      "rawResponse": "Here is your updated function with enhanced error handling, validation, and added retry logic using async/await pattern in ES6+ syntax:\n\n```javascript\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic - attempt to get data up to three times\n    try {\n      response = await fetch(`/api/users/${userId}`);\n      break; // Break the loop if successful\n    } catch (err) {\n      console.error('Fetch error:', err); \n      if (i < 2) continue; // If not last attempt, retry\n      else throw new Error('Failed to fetch user data after multiple attempts');\n    }\n  }\n  \n  const data = await response.json();\n  return data;\n}\n```\nThis function will try to get the user data up to three times before throwing an error if it fails all attempts. It also checks for a valid `userId` and throws an error if not provided. The fetch call is wrapped in a try/catch block so any errors during that process are caught and logged, but do not halt execution of the function.\n",
+      "improvedCode": "async function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic - attempt to get data up to three times\n    try {\n      response = await fetch(`/api/users/${userId}`);\n      break; // Break the loop if successful\n    } catch (err) {\n      console.error('Fetch error:', err); \n      if (i < 2) continue; // If not last attempt, retry\n      else throw new Error('Failed to fetch user data after multiple attempts');\n    }\n  }\n  \n  const data = await response.json();\n  return data;\n}",
+      "duration": 6810,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasErrorHandling": true,
+        "hasModernSyntax": true,
+        "hasAsync": true,
+        "taskCompleted": true,
+        "score": 1,
+        "rawScore": 1,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:26.026Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "javascript",
+      "scenario": "class-optimization",
+      "task": "Add off method, once method, and error handling",
+      "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+      "rawResponse": "Here is your updated class with added `off`, `once` methods and some basic error handling:\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event] = this.events[event].filter(cb => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      callback.apply(null, arguments);\n      self.off(event, fn);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) this.events[event] = [];\n    \n    this.events[event].push(fn);\n  }\n  \n  emit(event, data) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}\n```\nThis updated class now includes the following features:\n1. `off` method to remove specific callback function from a given event.\n2. `once` method to add an event listener that will be triggered only once before being removed automatically.\n3. Throws TypeError when invalid arguments are provided for methods like on, off and emit.\n4. If no such event exists while emitting or removing it does nothing (no error thrown).\n",
+      "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event] = this.events[event].filter(cb => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      callback.apply(null, arguments);\n      self.off(event, fn);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) this.events[event] = [];\n    \n    this.events[event].push(fn);\n  }\n  \n  emit(event, data) {\n    if (typeof event !== 'string') throw new TypeError('Event must be a string');\n    \n    if (!this.events[event]) return; // No such event exists\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}",
+      "duration": 12378,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasErrorHandling": true,
+        "hasModernSyntax": true,
+        "score": 0.7,
+        "rawScore": 0.7,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:33.881Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "python",
+      "scenario": "basic-function",
+      "task": "Add memoization, type hints, and docstring",
+      "originalCode": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "rawResponse": "Here is your python function after adding memoization, type hints, and a docstring:\n\n```python\nfrom functools import lru_cache\nfrom typing import Dict\n\n@lru_cache(maxsize=None)  # Memoization\ndef fibonacci(n: int) -> int:\n    \"\"\"\n    Returns the nth number in the Fibonacci sequence.\n    \n    :param n: The index of the desired number in the Fibonacci sequence.\n    :type n: int\n    :return: The nth number in the Fibonacci sequence.\n    :rtype: int\n    \"\"\"\n    if n <= 1:  # Base case\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```\nIn this code, we use Python's built-in decorator `@lru_cache` to add memoization. This is a way of optimizing the recursive Fibonacci function by storing and reusing results of previous calculations. The `maxsize=None` argument means that the cache can grow without bounds.\n\nWe also use type hints from Python's typing module to specify the types of our arguments and return value, making it easier for other developers to understand what each part of this function does.\n\nFinally, we add a docstring explaining what the function does, its parameters, and its return value. This is good practice in Python as it can make your code more readable and maintainable.\n",
+      "improvedCode": "from functools import lru_cache\nfrom typing import Dict\n\n@lru_cache(maxsize=None)  # Memoization\ndef fibonacci(n: int) -> int:\n    \"\"\"\n    Returns the nth number in the Fibonacci sequence.\n    \n    :param n: The index of the desired number in the Fibonacci sequence.\n    :type n: int\n    :return: The nth number in the Fibonacci sequence.\n    :rtype: int\n    \"\"\"\n    if n <= 1:  # Base case\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)",
+      "duration": 7853,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "hasDocstring": true,
+        "score": 0.5833333333333334,
+        "rawScore": 0.7,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:38.704Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "python",
+      "scenario": "data-processing",
+      "task": "Add error handling, CSV library usage, and type hints",
+      "originalCode": "def process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            data.append(line.strip().split(','))\n    return data",
+      "rawResponse": "Here is your updated python code:\n\n```python\nimport csv\nfrom typing import List, TextIO\n\ndef process_csv(filename: str) -> List[List[str]]:\n    try:\n        with open(filename, 'r') as f:  # type: TextIO\n            data = list(csv.reader(f))\n        return data\n    except FileNotFoundError:\n        print(\"File not found\")\n        return []\n    except csv.Error as e:\n        print(f\"Couldn't parse CSV file due to {e}\")\n        return []\n```\nThis function opens the specified filename and reads its content line by line, splitting each line into a list of strings using Python's built-in `csv` module. It also includes error handling for cases where the file does not exist or there is an issue with parsing the CSV data. Type hints are used to specify expected types at runtime.\n",
+      "improvedCode": "import csv\nfrom typing import List, TextIO\n\ndef process_csv(filename: str) -> List[List[str]]:\n    try:\n        with open(filename, 'r') as f:  # type: TextIO\n            data = list(csv.reader(f))\n        return data\n    except FileNotFoundError:\n        print(\"File not found\")\n        return []\n    except csv.Error as e:\n        print(f\"Couldn't parse CSV file due to {e}\")\n        return []",
+      "duration": 4822,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "hasErrorHandling": true,
+        "taskCompleted": true,
+        "score": 0.8333333333333334,
+        "rawScore": 1,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:45.760Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "python",
+      "scenario": "class-improvement",
+      "task": "Add empty check, peek method, size property, and type hints",
+      "originalCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+      "rawResponse": "Here is your enhanced python code:\n\n```python\nfrom typing import Any\n\nclass Stack:\n    def __init__(self):\n        self.items : list[Any] = []\n    \n    def push(self, item: Any) -> None:\n        self.items.append(item)\n    \n    def pop(self) -> Any:\n        if not self.is_empty():\n            return self.items.pop()\n        else:\n            raise IndexError(\"Stack is empty\")\n        \n    def peek(self) -> Any:\n        if not self.is_empty():\n            return self.items[-1]\n        else:\n            raise IndexError(\"Stack is empty\")\n    \n    @property\n    def size(self) -> int:\n        return len(self.items)\n        \n    def is_empty(self) -> bool:\n        return not self.items\n```\nThis code adds the following features to your Stack class:\n- Peek method that allows you to see the top element of the stack without removing it.\n- Size property that returns the current size of the stack.\n- is_empty function that checks if the stack is empty, and raises an exception when trying to pop or peek from an empty stack.\n- Type hints for all methods using Python's built-in typing module.\n",
+      "improvedCode": "from typing import Any\n\nclass Stack:\n    def __init__(self):\n        self.items : list[Any] = []\n    \n    def push(self, item: Any) -> None:\n        self.items.append(item)\n    \n    def pop(self) -> Any:\n        if not self.is_empty():\n            return self.items.pop()\n        else:\n            raise IndexError(\"Stack is empty\")\n        \n    def peek(self) -> Any:\n        if not self.is_empty():\n            return self.items[-1]\n        else:\n            raise IndexError(\"Stack is empty\")\n    \n    @property\n    def size(self) -> int:\n        return len(self.items)\n        \n    def is_empty(self) -> bool:\n        return not self.items",
+      "duration": 7055,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "hasErrorHandling": true,
+        "score": 0.6666666666666667,
+        "rawScore": 0.8,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:51.948Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "rust",
+      "scenario": "basic-safety",
+      "task": "Add Result type for safe division and handle zero",
+      "originalCode": "fn divide(a: f64, b: f64) -> f64 {\n    a / b\n}",
+      "rawResponse": "Here is your updated function in Rust, using the `Result` enum to handle potential errors (division by zero):\n\n```rust\nfn divide(a: f64, b: f64) -> Result<f64, &'static str> {\n    if b == 0.0 {\n        Err(\"Cannot divide by zero\")\n    } else {\n        Ok(a / b)\n    }\n}\n```\n\nYou can use this function in a way that is safe from division by zero:\n\n```rust\nfn main() {\n    match divide(10.0, 2.0) {\n        Ok(result) => printlnrlnln\"Result: {}\", result),\n        Err(error_message) => printlnrlnln\"Error: {}\", error_message),\n    }\n}\n```\n\nIn this way, if the second argument to `divide` is zero, it will return an instance of `Err` with a string message. If not, it returns an instance of `Ok` containing the result of division. This allows you to handle potential errors in a safe and idiomatic way in Rust.\n",
+      "improvedCode": "fn main() {\n    match divide(10.0, 2.0) {\n        Ok(result) => printlnrlnln\"Result: {}\", result),\n        Err(error_message) => printlnrlnln\"Error: {}\", error_message),\n    }\n}",
+      "duration": 6187,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasProperErrorHandling": true,
+        "score": 0.3846153846153846,
+        "rawScore": 0.5,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:15:56.244Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "rust",
+      "scenario": "ownership-optimization",
+      "task": "Optimize to use string slice reference instead of ownership",
+      "originalCode": "fn process_string(s: String) -> String {\n    let result = s.to_uppercase();\n    result\n}",
+      "rawResponse": "Here is your optimized rust code:\n\n```rust\nfn process_string(s: &str) -> String {\n    let result = s.to_uppercase();\n    result\n}\n```\n\nIn this version, the function takes a string slice reference (`&str`) instead of `String`. This means that it doesn'<｜begin▁of▁sentence｜> own the string data and can be used on any string value without transferring ownership or copying it around. It also provides more flexibility as you can pass in string literals directly:\n\n```rust\nlet s = \"Hello, world!\";\nprintln!(\"{}\", process_string(s));  // Outputs: HELLO, WORLD!\n```\n",
+      "improvedCode": "fn process_string(s: &str) -> String {\n    let result = s.to_uppercase();\n    result\n}",
+      "duration": 4290,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasBorrowing": true,
+        "score": 0.3076923076923077,
+        "rawScore": 0.4,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:00.759Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "rust",
+      "scenario": "error-handling",
+      "task": "Replace unwrap with proper error handling using Result",
+      "originalCode": "fn read_number(s: &str) -> i32 {\n    s.parse().unwrap()\n}",
+      "rawResponse": "Here's how you can improve your function to handle errors properly in Rust:\n\n```rust\nfn read_number(s: &str) -> Result<i32, <ParseError as FromStr>::Err> {\n    s.parse().map_err(|e| e.to_string())\n}\n```\n\nIn this version of the function, `parse()` returns a `Result` that can be either an integer (on success) or an error (if parsing fails). The `unwrap()` method is replaced with the `map_err(|e| e.to_string())` which will convert any parse errors into strings for better error handling. This function now returns a `Result` that can either be an integer on success, or an error message if parsing fails.\n",
+      "improvedCode": "fn read_number(s: &str) -> Result<i32, <ParseError as FromStr>::Err> {\n    s.parse().map_err(|e| e.to_string())\n}",
+      "duration": 4512,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasResultType": true,
+        "hasBorrowing": true,
+        "taskCompleted": true,
+        "score": 0.7692307692307692,
+        "rawScore": 1,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:07.656Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "cpp",
+      "scenario": "memory-safety",
+      "task": "Add destructor, copy constructor, and move semantics",
+      "originalCode": "class Buffer {\n    char* data;\n    int size;\npublic:\n    Buffer(int s) {\n        data = new char[s];\n        size = s;\n    }\n};",
+      "rawResponse": "Here is your updated class with added destructor, copy constructor, and move constructor:\n\n```cpp\nclass Buffer {\n    char* data;\n    int size;\npublic:\n    // Constructor\n    Buffer(int s) : data(new char[s]), size(s) {}\n    \n    // Copy constructor\n    Buffer(const Buffer& other) : data(new char[other.size]), size(other.size) {\n        std::copy(other.data, other.data + other.size, data);\n    }\n    \n    // Move constructor\n    Buffer(Buffer&& other) noexcept : data(std::exchange(other.data, nullptr)), size(std::exchange(other.size, 0)) {}\n    \n    // Destructor\n    ~Buffer() { delete[] data; }\n};\n```\nIn the copy constructor, we are allocating new memory and copying `other`'s contents into it. In the move constructor, we are transferring ownership of `data` pointer to this object from `other` without any copies (using `std::exchange`). Finally, in destructor, we deallocate the memory that was allocated for `data`.\n",
+      "improvedCode": "class Buffer {\n    char* data;\n    int size;\npublic:\n    // Constructor\n    Buffer(int s) : data(new char[s]), size(s) {}\n    \n    // Copy constructor\n    Buffer(const Buffer& other) : data(new char[other.size]), size(other.size) {\n        std::copy(other.data, other.data + other.size, data);\n    }\n    \n    // Move constructor\n    Buffer(Buffer&& other) noexcept : data(std::exchange(other.data, nullptr)), size(std::exchange(other.size, 0)) {}\n    \n    // Destructor\n    ~Buffer() { delete[] data; }\n};",
+      "duration": 6895,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasDestructor": true,
+        "hasStdLibrary": true,
+        "score": 0.5384615384615384,
+        "rawScore": 0.7,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:12.839Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "cpp",
+      "scenario": "modern-cpp",
+      "task": "Convert to use smart pointers and modern C++ features",
+      "originalCode": "int* createArray(int size) {\n    int* arr = new int[size];\n    for(int i = 0; i < size; i++) {\n        arr[i] = i;\n    }\n    return arr;\n}",
+      "rawResponse": "You can replace raw pointer with `std::unique_ptr<int[]>` which automatically deallocates memory when it's no longer in use. Here is how you could rewrite your function to make use of smart pointers and modern C++ features:\n\n```cpp\n#include <memory>\n\nstd::unique_ptr<int[]> createArray(int size) {\n    std::unique_ptr<int[]> arr = std::make<｜begin▁of▁sentence｜>int[size]();\n    for(int i = 0; i < size; i++) {\n        arr[i] = i;\n    }\n    return arr;\n}\n```\n\nPlease note that the `std::unique_ptr` is a move-only type and thus can't be copied. If you need to pass it around or store it, consider using `std::shared_ptr<int[]>` instead which allows copying but still ensures proper deallocation when no longer in use.\n",
+      "improvedCode": "#include <memory>\n\nstd::unique_ptr<int[]> createArray(int size) {\n    std::unique_ptr<int[]> arr = std::make<｜begin▁of▁sentence｜>int[size]();\n    for(int i = 0; i < size; i++) {\n        arr[i] = i;\n    }\n    return arr;\n}",
+      "duration": 5182,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasSmartPointers": true,
+        "hasStdLibrary": true,
+        "score": 0.6153846153846154,
+        "rawScore": 0.8,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:20.316Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "web",
+      "scenario": "html-accessibility",
+      "task": "Add proper labels, ARIA attributes, and semantic HTML",
+      "originalCode": "<form>\n  <input type=\"text\" placeholder=\"Email\">\n  <input type=\"password\" placeholder=\"Password\">\n  <button>Login</button>\n</form>",
+      "rawResponse": "Here's your updated form with semantic HTML5 and ARIA attributes for accessibility:\n\n```web\n<form action=\"#\" method=\"post\">\n  <div>\n    <label for=\"email\">Email:</label>\n    <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"Enter your email\" aria-required=\"true\" required>\n  </div>\n  \n  <div>\n    <label for=\"password\">Password:</label>\n    <input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter your password\" aria-required=\"true\" required>\n  </div>\n  \n  <button type=\"submit\">Login</button>\n</form>\n```\n\nThis code includes the following improvements:\n1. Semantic HTML5 elements (`form`, `input`, and `label`) are used for better structure and readability. \n2. ARIA attributes have been added to improve accessibility. The `aria-required=\"true\"` attribute indicates that the input field is required.\n3. The `for` attribute in the `label` element pairs it with its corresponding form control, improving usability.\n4. The `placeholder` attribute has been replaced by actual labels for better user experience and accessibility. \n5. Added a `div` wrapper around each input field to group them together semantically.\n",
+      "improvedCode": "web\n<form action=\"#\" method=\"post\">\n  <div>\n    <label for=\"email\">Email:</label>\n    <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"Enter your email\" aria-required=\"true\" required>\n  </div>\n  \n  <div>\n    <label for=\"password\">Password:</label>\n    <input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter your password\" aria-required=\"true\" required>\n  </div>\n  \n  <button type=\"submit\">Login</button>\n</form>",
+      "duration": 7476,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasAccessibility": true,
+        "hasLabels": true,
+        "score": 0.642857142857143,
+        "rawScore": 0.9000000000000001,
+        "maxScore": 1.4
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:27.388Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "web",
+      "scenario": "css-responsive",
+      "task": "Make responsive with flexbox/grid and mobile-first approach",
+      "originalCode": ".container {\n  width: 1200px;\n  margin: 0 auto;\n}\n\n.card {\n  width: 300px;\n  float: left;\n  margin: 10px;\n}",
+      "rawResponse": "You can use Flexbox or Grid to make your web design more responsive. Here's how you could do it using Flexbox:\n\n```web\n<div class=\"container\">\n  <div class=\"card\">Content 1</div>\n  <div class=\"card\">Content 2</div>\n  <!-- More cards... -->\n</div>\n```\n\nAnd the CSS:\n\n```web\n.container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around; /* This will distribute items evenly in the container */\n}\n\n.card {\n  flex: 1 0 200px; /* This is a shorthand for flex-grow, flex-shrink and flex-basis combined. It means that the card will grow as needed but not shrink below its base size of 200px */\n  margin: 10px;\n}\n```\n\nThis code will create a row of cards that wrap to the next line when there is not enough space, and evenly distribute the remaining space between them. The `flex` property is a shorthand for `flex-grow`, `flex-shrink` and `flex-basis` which determine how a flex item grows or shrinks to fit the container.\n",
+      "improvedCode": "web\n.container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around; /* This will distribute items evenly in the container */\n}\n\n.card {\n  flex: 1 0 200px; /* This is a shorthand for flex-grow, flex-shrink and flex-basis combined. It means that the card will grow as needed but not shrink below its base size of 200px */\n  margin: 10px;\n}",
+      "duration": 7071,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasResponsive": true,
+        "score": 0.35714285714285715,
+        "rawScore": 0.5,
+        "maxScore": 1.4
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:29.644Z",
+      "model": "starcoder2:3b",
+      "language": "javascript",
+      "scenario": "basic-validation",
+      "task": "Add zero division check and type validation",
+      "originalCode": "function divide(a, b) {\n  return a / b;\n}",
+      "rawResponse": "\n\n```javascript\nfunction divide(a, b) {\n    if (b == 0 || isNaN(a)||isNaN(b)) return 'Error';\n    else return a / b;\n}\n```\n",
+      "improvedCode": "function divide(a, b) {\n    if (b == 0 || isNaN(a)||isNaN(b)) return 'Error';\n    else return a / b;\n}",
+      "duration": 2256,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "score": 0.2,
+        "rawScore": 0.2,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:29.940Z",
+      "model": "starcoder2:3b",
+      "language": "javascript",
+      "scenario": "async-error-handling",
+      "task": "Add comprehensive error handling and retry logic",
+      "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+      "rawResponse": "\n\nHint: You can use try/catch/finally blocks.\n",
+      "improvedCode": "",
+      "duration": 295,
+      "success": false,
+      "qualityMetrics": {
+        "score": 0,
+        "rawScore": 0,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:32.639Z",
+      "model": "starcoder2:3b",
+      "language": "javascript",
+      "scenario": "class-optimization",
+      "task": "Add off method, once method, and error handling",
+      "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+      "rawResponse": "\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index !== -1) {\n      this.events[event].splice(index, 1);\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n  \n  once(event, callback) {\n    function wrapper() {\n      const result = callback();\n\n      this.off(event, wrapper);\n      \n      return result;\n    };\n\n    this.on(event, wrapper);\n  }\n\n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n}\n```",
+      "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index !== -1) {\n      this.events[event].splice(index, 1);\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n  \n  once(event, callback) {\n    function wrapper() {\n      const result = callback();\n\n      this.off(event, wrapper);\n      \n      return result;\n    };\n\n    this.on(event, wrapper);\n  }\n\n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    } else {\n      throw new Error('There is no such event');\n    }\n  }\n}",
+      "duration": 2698,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasErrorHandling": true,
+        "hasModernSyntax": true,
+        "score": 0.7,
+        "rawScore": 0.7,
+        "maxScore": 1
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:33.492Z",
+      "model": "starcoder2:3b",
+      "language": "python",
+      "scenario": "basic-function",
+      "task": "Add memoization, type hints, and docstring",
+      "originalCode": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+      "rawResponse": "\n\n### Solution\n```python\nfrom functools import lru_cache\n\n\n@lru_cache(maxsize=None)\ndef fibonacci(n: int):\n    if n <= 1:\n        return n\n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n```\n",
+      "improvedCode": "from functools import lru_cache\n\n\n@lru_cache(maxsize=None)\ndef fibonacci(n: int):\n    if n <= 1:\n        return n\n\n    return fibonacci(n - 1) + fibonacci(n - 2)",
+      "duration": 852,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "score": 0.4166666666666667,
+        "rawScore": 0.5,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:35.258Z",
+      "model": "starcoder2:3b",
+      "language": "python",
+      "scenario": "data-processing",
+      "task": "Add error handling, CSV library usage, and type hints",
+      "originalCode": "def process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            data.append(line.strip().split(','))\n    return data",
+      "rawResponse": "\n\n## Solution\n\n```python\nfrom typing import List\n\n\ndef process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            try:\n                data.append([int(x) if x else None for x in line.strip().split(',')])\n            except ValueError:  # or TypeError\n                pass\n\n    return data\n```\n\n## Feedback\n\n- [ ] I like the solution.\n- [ ] The solution is not good enough, but it's better than nothing.\n- [x] It can be improved by doing some more work.\n- [ ] I do not understand why this solution is wrong or doesn't meet the requirements.\n",
+      "improvedCode": "from typing import List\n\n\ndef process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            try:\n                data.append([int(x) if x else None for x in line.strip().split(',')])\n            except ValueError:  # or TypeError\n                pass\n\n    return data",
+      "duration": 1763,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "hasErrorHandling": true,
+        "taskCompleted": true,
+        "score": 0.8333333333333334,
+        "rawScore": 1,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:36.754Z",
+      "model": "starcoder2:3b",
+      "language": "python",
+      "scenario": "class-improvement",
+      "task": "Add empty check, peek method, size property, and type hints",
+      "originalCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+      "rawResponse": "\n\n```python\nfrom typing import List\n\n\nclass Stack(List):\n    def __init__(self) -> None:\n        self._items = []\n\n    @property\n    def size(self) -> int:\n        return len(self.items)\n    \n    @property\n    def items(self) -> list[int]:\n        return self._items\n\n    def push(self, item: int):\n        self._items.append(item)\n    \n    def pop(self) -> int | None:\n        if not self._items:\n            raise IndexError('Stack is empty')\n\n        return self._items[-1]\n```\n",
+      "improvedCode": "from typing import List\n\n\nclass Stack(List):\n    def __init__(self) -> None:\n        self._items = []\n\n    @property\n    def size(self) -> int:\n        return len(self.items)\n    \n    @property\n    def items(self) -> list[int]:\n        return self._items\n\n    def push(self, item: int):\n        self._items.append(item)\n    \n    def pop(self) -> int | None:\n        if not self._items:\n            raise IndexError('Stack is empty')\n\n        return self._items[-1]",
+      "duration": 1495,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasTypeHints": true,
+        "hasErrorHandling": true,
+        "score": 0.6666666666666667,
+        "rawScore": 0.8,
+        "maxScore": 1.2
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:37.548Z",
+      "model": "starcoder2:3b",
+      "language": "rust",
+      "scenario": "basic-safety",
+      "task": "Add Result type for safe division and handle zero",
+      "originalCode": "fn divide(a: f64, b: f64) -> f64 {\n    a / b\n}",
+      "rawResponse": "\n\n```rust\nfn divide(a: f64, b: f64) -> Result<f64> {\n    if b == 0.0 {\n        return Err(\"Division by zero\") \n    } else { \n        Ok(a / b)\n    }\n}\n```",
+      "improvedCode": "fn divide(a: f64, b: f64) -> Result<f64> {\n    if b == 0.0 {\n        return Err(\"Division by zero\") \n    } else { \n        Ok(a / b)\n    }\n}",
+      "duration": 794,
+      "success": true,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasResultType": true,
+        "hasProperErrorHandling": true,
+        "score": 0.6923076923076924,
+        "rawScore": 0.9000000000000001,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:37.993Z",
+      "model": "starcoder2:3b",
+      "language": "rust",
+      "scenario": "ownership-optimization",
+      "task": "Optimize to use string slice reference instead of ownership",
+      "originalCode": "fn process_string(s: String) -> String {\n    let result = s.to_uppercase();\n    result\n}",
+      "rawResponse": "\n\n```rust\nfn process_string(s: &str) -> String {\n    s.to_uppercase()\n}\n```\n",
+      "improvedCode": "fn process_string(s: &str) -> String {\n    s.to_uppercase()\n}",
+      "duration": 445,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasBorrowing": true,
+        "score": 0.3076923076923077,
+        "rawScore": 0.4,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:38.131Z",
+      "model": "starcoder2:3b",
+      "language": "rust",
+      "scenario": "error-handling",
+      "task": "Replace unwrap with proper error handling using Result",
+      "originalCode": "fn read_number(s: &str) -> i32 {\n    s.parse().unwrap()\n}",
+      "rawResponse": "\n",
+      "improvedCode": "",
+      "duration": 137,
+      "success": false,
+      "qualityMetrics": {
+        "score": 0,
+        "rawScore": 0,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:38.275Z",
+      "model": "starcoder2:3b",
+      "language": "cpp",
+      "scenario": "memory-safety",
+      "task": "Add destructor, copy constructor, and move semantics",
+      "originalCode": "class Buffer {\n    char* data;\n    int size;\npublic:\n    Buffer(int s) {\n        data = new char[s];\n        size = s;\n    }\n};",
+      "rawResponse": "\n",
+      "improvedCode": "",
+      "duration": 142,
+      "success": false,
+      "qualityMetrics": {
+        "score": 0,
+        "rawScore": 0,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:40.235Z",
+      "model": "starcoder2:3b",
+      "language": "cpp",
+      "scenario": "modern-cpp",
+      "task": "Convert to use smart pointers and modern C++ features",
+      "originalCode": "int* createArray(int size) {\n    int* arr = new int[size];\n    for(int i = 0; i < size; i++) {\n        arr[i] = i;\n    }\n    return arr;\n}",
+      "rawResponse": "\n\n```cpp\nint* createArray(int size) {\n    int* arr = new int[size];\n    for (auto i{0}; i < size; ++i)\n        arr[i] = i;\n\n    return arr;\n}\n```\n\n## Task 2. Smart pointers and modern C++ features\n\nOriginal cpp code:\n```cpp\nint* createArray(int size) {\n    int* arr = new int[size];\n    for (int i{0}; i < size; ++i)\n        arr[i] = i;\n\n    return arr;\n}\n```\n\nTask: Convert to use smart pointers and modern C++ features. Use modern C++ features (C++17 or later).",
+      "improvedCode": "int* createArray(int size) {\n    int* arr = new int[size];\n    for (auto i{0}; i < size; ++i)\n        arr[i] = i;\n\n    return arr;\n}",
+      "duration": 1959,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "score": 0.15384615384615385,
+        "rawScore": 0.2,
+        "maxScore": 1.3
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:41.300Z",
+      "model": "starcoder2:3b",
+      "language": "web",
+      "scenario": "html-accessibility",
+      "task": "Add proper labels, ARIA attributes, and semantic HTML",
+      "originalCode": "<form>\n  <input type=\"text\" placeholder=\"Email\">\n  <input type=\"password\" placeholder=\"Password\">\n  <button>Login</button>\n</form>",
+      "rawResponse": "\n\n```web\n<form action=\"login\" method=\"post\">\n  <label for=\"email\">Email</label>\n  <input type=\"email\" id=\"email\" placeholder=\"Email\">\n\n  <label for=\"password\">Password</label>\n  <input type=\"<PASSWORD>\" id=\"password\" placeholder=\"<PASSWORD>\">\n  \n  <button type=\"submit\">Login</button>\n</form>\n```\n",
+      "improvedCode": "web\n<form action=\"login\" method=\"post\">\n  <label for=\"email\">Email</label>\n  <input type=\"email\" id=\"email\" placeholder=\"Email\">\n\n  <label for=\"password\">Password</label>\n  <input type=\"<PASSWORD>\" id=\"password\" placeholder=\"<PASSWORD>\">\n  \n  <button type=\"submit\">Login</button>\n</form>",
+      "duration": 1062,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasLabels": true,
+        "score": 0.35714285714285715,
+        "rawScore": 0.5,
+        "maxScore": 1.4
+      },
+      "error": null
+    },
+    {
+      "timestamp": "2025-08-02T16:16:42.895Z",
+      "model": "starcoder2:3b",
+      "language": "web",
+      "scenario": "css-responsive",
+      "task": "Make responsive with flexbox/grid and mobile-first approach",
+      "originalCode": ".container {\n  width: 1200px;\n  margin: 0 auto;\n}\n\n.card {\n  width: 300px;\n  float: left;\n  margin: 10px;\n}",
+      "rawResponse": "\n\n## Solution\n\n```css\n.container {\n  width: 98%; /* 1200px/100% */\n  margin: 0 auto;\n\n  display: flex;\n  flex-wrap: wrap;\n}\n\n@media (max-width: 768px) {\n  .card {\n    width: calc(50vw - 40px); /* 300px/1200px*50% */\n\n    margin: 10px auto;\n  }\n\n  .container {\n    flex-direction: column;\n  }\n}\n```\n",
+      "improvedCode": "css\n.container {\n  width: 98%; /* 1200px/100% */\n  margin: 0 auto;\n\n  display: flex;\n  flex-wrap: wrap;\n}\n\n@media (max-width: 768px) {\n  .card {\n    width: calc(50vw - 40px); /* 300px/1200px*50% */\n\n    margin: 10px auto;\n  }\n\n  .container {\n    flex-direction: column;\n  }\n}",
+      "duration": 1594,
+      "success": false,
+      "qualityMetrics": {
+        "hasCode": true,
+        "hasResponsive": true,
+        "score": 0.35714285714285715,
+        "rawScore": 0.5,
+        "maxScore": 1.4
+      },
+      "error": null
+    }
+  ]
+}

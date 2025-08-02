@@ -318,17 +318,15 @@ public:
         web: 'Use semantic HTML5 and modern CSS.'
       };
       
-      const prompt = `Original ${language} code:
-\`\`\`${language}
-${scenario.code}
-\`\`\`
-
-Task: ${scenario.task}
-
-Return only the improved code. ${languageHints[language] || ''}`;
+      // 새로운 통합 방식: improveCode 메서드 사용 (웹 전처리기 포함)
+      const improveResult = await ollamaCodeBridge.improveCode(
+        scenario.code,
+        scenario.task,
+        { fileType: language, debug: false }
+      );
       
-      const rawResponse = await ollamaCodeBridge.callOllama(prompt);
-      const improvedCode = multiLanguagePreprocessor(rawResponse, language);
+      const rawResponse = improveResult.rawResponse;
+      const improvedCode = improveResult.improvedSnippet;
       
       const duration = Date.now() - startTime;
       

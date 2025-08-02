@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-02T16:19:45.770Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "async-error-handling",
+  "task": "Add comprehensive error handling and retry logic",
+  "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+  "rawResponse": "\n\n```javascript\nasync function fetchUserData(userId) {\n    try{\n        const response = await fetch('/api/users/' + userId);\n        if (response.status === 200){\n            return await response.json();\n        } else throw new Error('Response status is not OK');\n    } catch (err) {\n        console.log(err.message, 'Retrying...');\n        const response = await fetch('/api/users/' + userId);\n        if (response.status === 200){\n            return await response.json();\n        } else throw new Error('Response status is not OK');\n    }\n}\n```\n",
+  "improvedCode": "async function fetchUserData(userId) {\n    try{\n        const response = await fetch('/api/users/' + userId);\n        if (response.status === 200){\n            return await response.json();\n        } else throw new Error('Response status is not OK');\n    } catch (err) {\n        console.log(err.message, 'Retrying...');\n        const response = await fetch('/api/users/' + userId);\n        if (response.status === 200){\n            return await response.json();\n        } else throw new Error('Response status is not OK');\n    }\n}",
+  "duration": 1705,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "hasAsync": true,
+    "taskCompleted": true,
+    "score": 1,
+    "rawScore": 1,
+    "maxScore": 1
+  },
+  "error": null
+}

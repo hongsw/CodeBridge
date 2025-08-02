@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:19:22.405Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "cpp",
+  "scenario": "memory-safety",
+  "task": "Add destructor, copy constructor, and move semantics",
+  "originalCode": "class Buffer {\n    char* data;\n    int size;\npublic:\n    Buffer(int s) {\n        data = new char[s];\n        size = s;\n    }\n};",
+  "rawResponse": "Here is your modified class with added destructor, copy constructor, and move constructor:\n\n```cpp\nclass Buffer {\npublic:\n    char* data;\n    int size;\n    \n    // @constructor\n    Buffer(int s) : data(new char[s]), size(s) {}\n\n    // @destructor\n    ~Buffer() { delete[] data; }\n\n    // @copy_constructor\n    Buffer(const Buffer& other) : data(new char[other.size]), size(other.size) {\n        std::copy(other.data, other.data + other.size, data);\n    }\n\n    // @move_constructor\n    Buffer(Buffer&& other) noexcept : data(other.data), size(other.size) {\n        other.data = nullptr;\n        other.size = 0;\n    }\n};\n```\nIn this code, `@constructor` is used to denote the constructor, `@destructor` for destructors, `@copy_constructor` for copy constructors and `@move_constructor` for move constructors. These are not actual commands but they help in understanding the context of these special methods.\n",
+  "improvedCode": "cpp\nclass Buffer {\npublic:\n    char* data;\n    int size;\n    \n    // @constructor\n    Buffer(int s) : data(new char[s]), size(s) {}\n\n    // @destructor\n    ~Buffer() { delete[] data; }\n\n    // @copy_constructor\n    Buffer(const Buffer& other) : data(new char[other.size]), size(other.size) {\n        std::copy(other.data, other.data + other.size, data);\n    }\n\n    // @move_constructor\n    Buffer(Buffer&& other) noexcept : data(other.data), size(other.size) {\n        other.data = nullptr;\n        other.size = 0;\n    }\n};",
+  "duration": 7239,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasDestructor": true,
+    "hasStdLibrary": true,
+    "score": 0.5384615384615384,
+    "rawScore": 0.7,
+    "maxScore": 1.3
+  },
+  "error": null
+}

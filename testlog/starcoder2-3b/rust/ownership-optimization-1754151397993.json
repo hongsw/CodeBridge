@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T16:16:37.993Z",
+  "model": "starcoder2:3b",
+  "language": "rust",
+  "scenario": "ownership-optimization",
+  "task": "Optimize to use string slice reference instead of ownership",
+  "originalCode": "fn process_string(s: String) -> String {\n    let result = s.to_uppercase();\n    result\n}",
+  "rawResponse": "\n\n```rust\nfn process_string(s: &str) -> String {\n    s.to_uppercase()\n}\n```\n",
+  "improvedCode": "fn process_string(s: &str) -> String {\n    s.to_uppercase()\n}",
+  "duration": 445,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasBorrowing": true,
+    "score": 0.3076923076923077,
+    "rawScore": 0.4,
+    "maxScore": 1.3
+  },
+  "error": null
+}

@@ -5,6 +5,7 @@
 const { spawn } = require('child_process');
 const CodeBridge = require('../code-bridge');
 const { preprocessOllamaResponse } = require('../utils/ollama-preprocessor');
+const { preprocessWebResponse } = require('../utils/web-preprocessor');
 
 class OllamaCodeBridge {
   constructor(options = {}) {
@@ -149,13 +150,30 @@ Keep responses concise and focused on the code.`;
       
       console.log('🔄 LLM 응답 받음, 전처리 중...');
       
-      // Ollama 응답 전처리
-      const improvedSnippet = preprocessOllamaResponse(rawResponse, this.model, options.debug);
+      // 파일타입 기반 전처리기 선택
+      let improvedSnippet;
+      let fileType = options.fileType || 'js';
+      
+      // 웹 기술인 경우에만 웹 전처리기 사용
+      if (fileType === 'web' || fileType === 'html' || fileType === 'css') {
+        const webType = this.detectWebType(originalCode, instruction);
+        if (webType) {
+          console.log(`🌐 웹 기술 감지: ${webType}`);
+          improvedSnippet = preprocessWebResponse(rawResponse, webType, this.model);
+          fileType = webType === 'css' ? 'css' : webType === 'html' ? 'html' : 'js';
+        } else {
+          console.log(`🌐 웹 타입 자동 감지: ${fileType}`);
+          improvedSnippet = preprocessWebResponse(rawResponse, fileType, this.model);
+        }
+      } else {
+        // 기존 전처리기 사용 (JavaScript, Python, Rust, C++ 등)
+        improvedSnippet = preprocessOllamaResponse(rawResponse, this.model, options.debug);
+      }
       
       console.log('🔄 전처리 완료, CodeBridge로 병합 중...');
       
       // CodeBridge로 병합
-      const result = this.codeBridge.process(originalCode, improvedSnippet, 'js');
+      const result = this.codeBridge.process(originalCode, improvedSnippet, fileType);
       
       return {
         success: true,
@@ -318,6 +336,57 @@ class TestService {
         }
       });
     });
+  }
+
+  /**
+   * 웹 기술 타입 감지
+   */
+  detectWebType(originalCode, instruction) {
+    // 웹 기술 전용으로만 감지 (언어 매개변수 확인)
+    if (!originalCode || typeof originalCode !== 'string') return null;
+    
+    // 코드 내용 기반 감지 (더 엄격한 기준)
+    const codeIndicators = {
+      html: [/<[a-zA-Z][^>]*>[^<]*<\/[a-zA-Z][^>]*>/, /<!DOCTYPE/, /<html/, /<body/, /<form/, /<input/],
+      css: [/\.[a-zA-Z-_][^{]*\{[^}]+\}/, /#[a-zA-Z-_][^{]*\{[^}]+\}/, /@media[^{]*\{/],
+      javascript: [/function\s+[a-zA-Z_$][a-zA-Z0-9_$]*\s*\([^)]*\)\s*\{/, /=>\s*[{(]/, /document\.[a-zA-Z]/, /window\.[a-zA-Z]/]
+    };
+    
+    // 인스트럭션 기반 감지
+    const instructionIndicators = {
+      html: [/html/i, /tag/i, /element/i, /semantic/i, /accessibility/i, /aria/i, /label/i],
+      css: [/css/i, /style/i, /responsive/i, /flexbox/i, /grid/i, /mobile/i, /media query/i],
+      javascript: [/script/i, /function/i, /event/i, /dom/i, /jquery/i, /onclick/i]
+    };
+    
+    let scores = { html: 0, css: 0, javascript: 0 };
+    
+    // 코드 분석
+    for (const [type, patterns] of Object.entries(codeIndicators)) {
+      for (const pattern of patterns) {
+        if (pattern.test(originalCode)) {
+          scores[type] += 10;
+        }
+      }
+    }
+    
+    // 인스트럭션 분석
+    for (const [type, patterns] of Object.entries(instructionIndicators)) {
+      for (const pattern of patterns) {
+        if (pattern.test(instruction)) {
+          scores[type] += 20;
+        }
+      }
+    }
+    
+    // 최고 점수 타입 반환
+    const maxScore = Math.max(...Object.values(scores));
+    if (maxScore < 10) return null; // 웹 기술이 아님
+    
+    const detectedType = Object.keys(scores).find(type => scores[type] === maxScore);
+    console.log(`🎯 웹 타입 감지 결과: ${detectedType} (점수: ${scores[detectedType]})`);
+    
+    return detectedType;
   }
 }
 

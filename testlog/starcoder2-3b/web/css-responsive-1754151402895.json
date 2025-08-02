@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T16:16:42.895Z",
+  "model": "starcoder2:3b",
+  "language": "web",
+  "scenario": "css-responsive",
+  "task": "Make responsive with flexbox/grid and mobile-first approach",
+  "originalCode": ".container {\n  width: 1200px;\n  margin: 0 auto;\n}\n\n.card {\n  width: 300px;\n  float: left;\n  margin: 10px;\n}",
+  "rawResponse": "\n\n## Solution\n\n```css\n.container {\n  width: 98%; /* 1200px/100% */\n  margin: 0 auto;\n\n  display: flex;\n  flex-wrap: wrap;\n}\n\n@media (max-width: 768px) {\n  .card {\n    width: calc(50vw - 40px); /* 300px/1200px*50% */\n\n    margin: 10px auto;\n  }\n\n  .container {\n    flex-direction: column;\n  }\n}\n```\n",
+  "improvedCode": "css\n.container {\n  width: 98%; /* 1200px/100% */\n  margin: 0 auto;\n\n  display: flex;\n  flex-wrap: wrap;\n}\n\n@media (max-width: 768px) {\n  .card {\n    width: calc(50vw - 40px); /* 300px/1200px*50% */\n\n    margin: 10px auto;\n  }\n\n  .container {\n    flex-direction: column;\n  }\n}",
+  "duration": 1594,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasResponsive": true,
+    "score": 0.35714285714285715,
+    "rawScore": 0.5,
+    "maxScore": 1.4
+  },
+  "error": null
+}

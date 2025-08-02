@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T16:16:33.492Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "scenario": "basic-function",
+  "task": "Add memoization, type hints, and docstring",
+  "originalCode": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+  "rawResponse": "\n\n### Solution\n```python\nfrom functools import lru_cache\n\n\n@lru_cache(maxsize=None)\ndef fibonacci(n: int):\n    if n <= 1:\n        return n\n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n```\n",
+  "improvedCode": "from functools import lru_cache\n\n\n@lru_cache(maxsize=None)\ndef fibonacci(n: int):\n    if n <= 1:\n        return n\n\n    return fibonacci(n - 1) + fibonacci(n - 2)",
+  "duration": 852,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "score": 0.4166666666666667,
+    "rawScore": 0.5,
+    "maxScore": 1.2
+  },
+  "error": null
+}

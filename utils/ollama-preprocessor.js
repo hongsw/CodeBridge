@@ -82,9 +82,13 @@ class OllamaPreprocessor {
    * 코드 블록 추출
    */
   extractCodeBlocks(text) {
-    // 다양한 코드 블록 패턴
+    // 다양한 코드 블록 패턴 (웹 기술 포함)
     const patterns = [
+      // 웹 기술 패턴
+      /```(?:html|web|xml)?\n?([\s\S]*?)```/g,
+      /```(?:css|scss|sass)?\n?([\s\S]*?)```/g,
       /```(?:javascript|js|jsx|typescript|ts)?\n?([\s\S]*?)```/g,
+      // 기존 패턴
       /```\n?([\s\S]*?)```/g,
       /`([^`]+)`/g  // 인라인 코드
     ];

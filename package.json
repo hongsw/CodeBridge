@@ -1,9 +1,9 @@
 {
   "name": "codebridge-ai",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "main.js",
-  "description": "AST-based intelligent code integration platform with local LLM support. Merge code snippets while preserving structure, featuring Ollama integration for privacy-first AI coding assistance.",
-  "keywords": ["ast", "code-merge", "llm", "ollama", "babel", "javascript", "python", "rust", "cpp", "ai-coding", "local-ai", "privacy"],
+  "description": "Complete fullstack AI coding platform with AST-based code integration and local LLM support. Now with comprehensive web technology support (HTML/CSS/JS) plus JavaScript, Python, Rust, and C++.",
+  "keywords": ["ast", "code-merge", "llm", "ollama", "babel", "javascript", "python", "rust", "cpp", "html", "css", "web-development", "fullstack", "ai-coding", "local-ai", "privacy"],
   "author": "Seungwoo Hong <hongmartin@example.com>",
   "license": "MIT",
   "repository": {

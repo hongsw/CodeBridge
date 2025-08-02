@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:15:33.881Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "python",
+  "scenario": "basic-function",
+  "task": "Add memoization, type hints, and docstring",
+  "originalCode": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+  "rawResponse": "Here is your python function after adding memoization, type hints, and a docstring:\n\n```python\nfrom functools import lru_cache\nfrom typing import Dict\n\n@lru_cache(maxsize=None)  # Memoization\ndef fibonacci(n: int) -> int:\n    \"\"\"\n    Returns the nth number in the Fibonacci sequence.\n    \n    :param n: The index of the desired number in the Fibonacci sequence.\n    :type n: int\n    :return: The nth number in the Fibonacci sequence.\n    :rtype: int\n    \"\"\"\n    if n <= 1:  # Base case\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```\nIn this code, we use Python's built-in decorator `@lru_cache` to add memoization. This is a way of optimizing the recursive Fibonacci function by storing and reusing results of previous calculations. The `maxsize=None` argument means that the cache can grow without bounds.\n\nWe also use type hints from Python's typing module to specify the types of our arguments and return value, making it easier for other developers to understand what each part of this function does.\n\nFinally, we add a docstring explaining what the function does, its parameters, and its return value. This is good practice in Python as it can make your code more readable and maintainable.\n",
+  "improvedCode": "from functools import lru_cache\nfrom typing import Dict\n\n@lru_cache(maxsize=None)  # Memoization\ndef fibonacci(n: int) -> int:\n    \"\"\"\n    Returns the nth number in the Fibonacci sequence.\n    \n    :param n: The index of the desired number in the Fibonacci sequence.\n    :type n: int\n    :return: The nth number in the Fibonacci sequence.\n    :rtype: int\n    \"\"\"\n    if n <= 1:  # Base case\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)",
+  "duration": 7853,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "hasDocstring": true,
+    "score": 0.5833333333333334,
+    "rawScore": 0.7,
+    "maxScore": 1.2
+  },
+  "error": null
+}

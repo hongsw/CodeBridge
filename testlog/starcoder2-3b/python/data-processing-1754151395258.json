@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-08-02T16:16:35.258Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "scenario": "data-processing",
+  "task": "Add error handling, CSV library usage, and type hints",
+  "originalCode": "def process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            data.append(line.strip().split(','))\n    return data",
+  "rawResponse": "\n\n## Solution\n\n```python\nfrom typing import List\n\n\ndef process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            try:\n                data.append([int(x) if x else None for x in line.strip().split(',')])\n            except ValueError:  # or TypeError\n                pass\n\n    return data\n```\n\n## Feedback\n\n- [ ] I like the solution.\n- [ ] The solution is not good enough, but it's better than nothing.\n- [x] It can be improved by doing some more work.\n- [ ] I do not understand why this solution is wrong or doesn't meet the requirements.\n",
+  "improvedCode": "from typing import List\n\n\ndef process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            try:\n                data.append([int(x) if x else None for x in line.strip().split(',')])\n            except ValueError:  # or TypeError\n                pass\n\n    return data",
+  "duration": 1763,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "hasErrorHandling": true,
+    "taskCompleted": true,
+    "score": 0.8333333333333334,
+    "rawScore": 1,
+    "maxScore": 1.2
+  },
+  "error": null
+}

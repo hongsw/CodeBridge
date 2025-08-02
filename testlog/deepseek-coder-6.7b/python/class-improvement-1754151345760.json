@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-02T16:15:45.760Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "python",
+  "scenario": "class-improvement",
+  "task": "Add empty check, peek method, size property, and type hints",
+  "originalCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+  "rawResponse": "Here is your enhanced python code:\n\n```python\nfrom typing import Any\n\nclass Stack:\n    def __init__(self):\n        self.items : list[Any] = []\n    \n    def push(self, item: Any) -> None:\n        self.items.append(item)\n    \n    def pop(self) -> Any:\n        if not self.is_empty():\n            return self.items.pop()\n        else:\n            raise IndexError(\"Stack is empty\")\n        \n    def peek(self) -> Any:\n        if not self.is_empty():\n            return self.items[-1]\n        else:\n            raise IndexError(\"Stack is empty\")\n    \n    @property\n    def size(self) -> int:\n        return len(self.items)\n        \n    def is_empty(self) -> bool:\n        return not self.items\n```\nThis code adds the following features to your Stack class:\n- Peek method that allows you to see the top element of the stack without removing it.\n- Size property that returns the current size of the stack.\n- is_empty function that checks if the stack is empty, and raises an exception when trying to pop or peek from an empty stack.\n- Type hints for all methods using Python's built-in typing module.\n",
+  "improvedCode": "from typing import Any\n\nclass Stack:\n    def __init__(self):\n        self.items : list[Any] = []\n    \n    def push(self, item: Any) -> None:\n        self.items.append(item)\n    \n    def pop(self) -> Any:\n        if not self.is_empty():\n            return self.items.pop()\n        else:\n            raise IndexError(\"Stack is empty\")\n        \n    def peek(self) -> Any:\n        if not self.is_empty():\n            return self.items[-1]\n        else:\n            raise IndexError(\"Stack is empty\")\n    \n    @property\n    def size(self) -> int:\n        return len(self.items)\n        \n    def is_empty(self) -> bool:\n        return not self.items",
+  "duration": 7055,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "hasErrorHandling": true,
+    "score": 0.6666666666666667,
+    "rawScore": 0.8,
+    "maxScore": 1.2
+  },
+  "error": null
+}

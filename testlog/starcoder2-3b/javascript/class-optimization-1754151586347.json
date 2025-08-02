@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-02T16:19:46.346Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "class-optimization",
+  "task": "Add off method, once method, and error handling",
+  "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+  "rawResponse": "\n\n- [ ] on\n- [x] emit\n- [ ] off\n- [ ] once\n- [ ] error",
+  "improvedCode": "- [ ] on\n- [x] emit\n- [ ] off\n- [ ] once\n- [ ] error",
+  "duration": 576,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "score": 0.2,
+    "rawScore": 0.2,
+    "maxScore": 1
+  },
+  "error": null
+}

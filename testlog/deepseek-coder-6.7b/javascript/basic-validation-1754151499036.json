@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T16:18:19.033Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "basic-validation",
+  "task": "Add zero division check and type validation",
+  "originalCode": "function divide(a, b) {\n  return a / b;\n}",
+  "rawResponse": "Here is your modified function with added checks for zero division and type validation:\n\n```javascript\nfunction divide(a, b) {\n    // @params a, b - should be numbers\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both arguments must be of type number');\n    \n    // @decorator validate\n    if (b === 0) throw new Error(\"Cannot divide by zero\");\n  \n    return a / b;\n}\n```\n",
+  "improvedCode": "function divide(a, b) {\n    // @params a, b - should be numbers\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both arguments must be of type number');\n    \n    // @decorator validate\n    if (b === 0) throw new Error(\"Cannot divide by zero\");\n  \n    return a / b;\n}",
+  "duration": 5448,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "score": 0.5,
+    "rawScore": 0.5,
+    "maxScore": 1
+  },
+  "error": null
+}

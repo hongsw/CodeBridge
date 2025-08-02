@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-02T16:15:13.628Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "async-error-handling",
+  "task": "Add comprehensive error handling and retry logic",
+  "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+  "rawResponse": "Here is your updated function with enhanced error handling, validation, and added retry logic using async/await pattern in ES6+ syntax:\n\n```javascript\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic - attempt to get data up to three times\n    try {\n      response = await fetch(`/api/users/${userId}`);\n      break; // Break the loop if successful\n    } catch (err) {\n      console.error('Fetch error:', err); \n      if (i < 2) continue; // If not last attempt, retry\n      else throw new Error('Failed to fetch user data after multiple attempts');\n    }\n  }\n  \n  const data = await response.json();\n  return data;\n}\n```\nThis function will try to get the user data up to three times before throwing an error if it fails all attempts. It also checks for a valid `userId` and throws an error if not provided. The fetch call is wrapped in a try/catch block so any errors during that process are caught and logged, but do not halt execution of the function.\n",
+  "improvedCode": "async function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic - attempt to get data up to three times\n    try {\n      response = await fetch(`/api/users/${userId}`);\n      break; // Break the loop if successful\n    } catch (err) {\n      console.error('Fetch error:', err); \n      if (i < 2) continue; // If not last attempt, retry\n      else throw new Error('Failed to fetch user data after multiple attempts');\n    }\n  }\n  \n  const data = await response.json();\n  return data;\n}",
+  "duration": 6810,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "hasAsync": true,
+    "taskCompleted": true,
+    "score": 1,
+    "rawScore": 1,
+    "maxScore": 1
+  },
+  "error": null
+}
