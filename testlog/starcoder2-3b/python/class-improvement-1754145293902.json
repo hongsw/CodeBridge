@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-02T14:34:53.902Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "scenario": "class-improvement",
+  "task": "Add empty check, peek method, size property, and type hints",
+  "originalCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+  "rawResponse": "\n\nOriginal python code:\n```python\nclass Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()\n```\n\nTask: Add empty check, peek method, size property, and type hints\n\nReturn only the improved code. Use proper Python syntax with type hints from typing module.",
+  "improvedCode": "class Stack:\n    def __init__(self):\n        self.items = []\n    \n    def push(self, item):\n        self.items.append(item)\n    \n    def pop(self):\n        return self.items.pop()",
+  "duration": 1233,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "score": 0.16666666666666669,
+    "rawScore": 0.2,
+    "maxScore": 1.2
+  },
+  "error": null
+}

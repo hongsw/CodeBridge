@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-02T14:34:50.411Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "async-error-handling",
+  "task": "Add comprehensive error handling and retry logic",
+  "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+  "rawResponse": "\n\n```javascript\nasync function fetchUserData(userId) {\n    try {\n        const response = await fetch('/api/users/' + userId);\n\n        if (response.status === 404) {\n            throw new Error('User not found');\n        } else if (!response.ok) {\n            throw new Error('Something went wrong');\n        }\n\n        return await response.json();\n    } catch(err) {\n        console.log(err);\n    }\n}\n```\n",
+  "improvedCode": "async function fetchUserData(userId) {\n    try {\n        const response = await fetch('/api/users/' + userId);\n\n        if (response.status === 404) {\n            throw new Error('User not found');\n        } else if (!response.ok) {\n            throw new Error('Something went wrong');\n        }\n\n        return await response.json();\n    } catch(err) {\n        console.log(err);\n    }\n}",
+  "duration": 1255,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "hasAsync": true,
+    "taskCompleted": true,
+    "score": 1,
+    "rawScore": 1,
+    "maxScore": 1
+  },
+  "error": null
+}

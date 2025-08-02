@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-08-02T11:52:33.434Z",
+  "model": "starcoder2:3b",
+  "language": "web",
+  "testCase": "css-styling",
+  "success": false,
+  "duration": 7183,
+  "originalCode": "\n.card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid gray;\n}",
+  "task": "Make it responsive and add modern CSS features",
+  "error": "Unexpected token (2:0)"
+}

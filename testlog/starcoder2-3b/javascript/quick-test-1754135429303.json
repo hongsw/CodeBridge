@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-08-02T11:50:29.303Z",
+  "model": "starcoder2:3b",
+  "success": true,
+  "duration": 14365,
+  "originalCode": "\nfunction calculateDiscount(price, discountPercent) {\n  return price - (price * discountPercent / 100);\n}",
+  "task": "Add input validation and error handling",
+  "rawResponse": "\n\nInput:\n```javascript\ncalculateDiscount(25, 30) // 15\ncalculateDiscount(25, '30') // 15\ncalculateDiscount('25', 30) // 15\ncalculateDiscount(25, null) // 25\ncalculateDiscount(null, 30) // 0\n```\n\nOutput:\n```javascript\nfunction calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n    return;\n\n  const discount = Math.round((price * discountPercent / 100));\n  \n  console.log(`The total price is ${price - discount}`);\n}\n```",
+  "improvedSnippet": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n    return;\n\n  const discount = Math.round((price * discountPercent / 100));\n\n  console.log(`The total price is ${price - discount}`);\n}",
+  "finalCode": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n  return;\n\n  const discount = Math.round(price * discountPercent / 100);\n\n  console.log(`The total price is ${price - discount}`);\n}"
+}

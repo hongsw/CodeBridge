@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-08-02T14:34:02.904Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "python",
+  "scenario": "basic-function",
+  "task": "Add memoization, type hints, and docstring",
+  "originalCode": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+  "rawResponse": "Here is the updated python code:\n\n```python\nfrom typing import Dict\n\ndef fibonacci(n: int, memo: Dict[int, int] = {0: 0, 1: 1}) -> int:\n    \"\"\"\n    Calculate nth Fibonacci number using memoization.\n    \n    Args:\n        n (int): The position of the number in the fibonacci sequence to calculate.\n        memo (Dict[int, int]): Memoization dictionary for storing already calculated values. Defaults to {0: 0, 1: 1}.\n        \n    Returns:\n        int: nth Fibonacci number.\n    \n    Raises:\n        ValueError: If n is negative.\n    \"\"\"\n    if n < 0:\n        raise ValueError(\"n must be a non-negative integer\")\n    elif n not in memo:\n        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)\n    return memo[n]\n```\nThis code adds the functionality of memoization to avoid redundant recursive calls. It uses a dictionary for storing already calculated Fibonacci numbers and reuses them when needed. The type hints are added using Python's built-in typing module, which provides runtime type checking in Python 3.5+. A docstring is also added explaining the function's purpose, arguments, return value, and possible exceptions.\n",
+  "improvedCode": "from typing import Dict\n\ndef fibonacci(n: int, memo: Dict[int, int] = {0: 0, 1: 1}) -> int:\n    \"\"\"\n    Calculate nth Fibonacci number using memoization.\n    \n    Args:\n        n (int): The position of the number in the fibonacci sequence to calculate.\n        memo (Dict[int, int]): Memoization dictionary for storing already calculated values. Defaults to {0: 0, 1: 1}.\n        \n    Returns:\n        int: nth Fibonacci number.\n    \n    Raises:\n        ValueError: If n is negative.\n    \"\"\"\n    if n < 0:\n        raise ValueError(\"n must be a non-negative integer\")\n    elif n not in memo:\n        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)\n    return memo[n]",
+  "duration": 7767,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasTypeHints": true,
+    "hasDocstring": true,
+    "hasErrorHandling": true,
+    "score": 0.8333333333333334,
+    "rawScore": 1,
+    "maxScore": 1.2
+  },
+  "error": null
+}

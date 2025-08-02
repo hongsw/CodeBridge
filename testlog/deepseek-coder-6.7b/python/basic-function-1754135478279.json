@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-08-02T11:51:18.276Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "python",
+  "testCase": "basic-function",
+  "success": false,
+  "duration": 4892,
+  "originalCode": "\ndef calculate_average(numbers):\n    total = sum(numbers)\n    return total / len(numbers)",
+  "task": "Add type hints, docstring, and error handling for empty list",
+  "error": "Unexpected token (2:30)"
+}

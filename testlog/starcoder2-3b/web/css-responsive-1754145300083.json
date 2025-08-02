@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-02T14:35:00.083Z",
+  "model": "starcoder2:3b",
+  "language": "web",
+  "scenario": "css-responsive",
+  "task": "Make responsive with flexbox/grid and mobile-first approach",
+  "originalCode": ".container {\n  width: 1200px;\n  margin: 0 auto;\n}\n\n.card {\n  width: 300px;\n  float: left;\n  margin: 10px;\n}",
+  "rawResponse": "\n",
+  "improvedCode": "",
+  "duration": 142,
+  "success": false,
+  "qualityMetrics": {
+    "score": 0,
+    "rawScore": 0,
+    "maxScore": 1.4
+  },
+  "error": null
+}

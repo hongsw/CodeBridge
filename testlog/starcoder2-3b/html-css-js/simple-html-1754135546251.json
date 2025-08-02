@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-02T11:52:26.251Z",
+  "model": "starcoder2:3b",
+  "language": "web",
+  "testCase": "simple-html",
+  "success": true,
+  "duration": 2358,
+  "originalCode": "\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Content</p>\n  <button onclick=\"doSomething()\">Click me</button>\n</div>",
+  "task": "Add accessibility attributes and proper semantic HTML",
+  "rawResponse": "\n\n```javascript\n\n<div class=\"card\" role=\"region\">\n  <h2>Title</h2> // @role\n  <p>Content</p> // @role\n  <button onclick=\"doSomething()\">Click me</button>  // @role\n</div>\n```\n",
+  "improvedSnippet": "",
+  "finalCode": "",
+  "qualityMetrics": {
+    "hasAriaLabels": false,
+    "hasSemanticHTML": false,
+    "hasProperStructure": false
+  }
+}

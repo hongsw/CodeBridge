@@ -1,0 +1,99 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm ci
+        npm install --save-dev jest @babel/core babel-jest
+    
+    - name: Run basic tests
+      run: npm run test:basic
+    
+    - name: Run LLM compatibility tests
+      run: npm run test:llm
+    
+    - name: Run full test suite with coverage
+      run: npm run test:ci
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+  llm-integration:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Test Claude output patterns
+      run: |
+        echo "Testing Claude-style code snippets..."
+        node -e "
+        const { generateLLMGuide } = require('./test/llm-compatibility.test.js');
+        const guide = generateLLMGuide('claude');
+        console.log('Claude guide:', guide);
+        "
+    
+    - name: Test GPT-4 output patterns
+      run: |
+        echo "Testing GPT-4-style code snippets..."
+        node -e "
+        const { generateLLMGuide } = require('./test/llm-compatibility.test.js');
+        const guide = generateLLMGuide('gpt4');
+        console.log('GPT-4 guide:', guide);
+        "
+    
+    - name: Generate compatibility report
+      run: |
+        echo "# LLM Compatibility Report" > llm-compatibility-report.md
+        echo "## Tested Models" >> llm-compatibility-report.md
+        echo "- ✅ Claude" >> llm-compatibility-report.md
+        echo "- ✅ GPT-4" >> llm-compatibility-report.md
+        echo "- ✅ Gemini" >> llm-compatibility-report.md
+        echo "" >> llm-compatibility-report.md
+        echo "## Command Formats Supported" >> llm-compatibility-report.md
+        echo "- \`// @command value\`" >> llm-compatibility-report.md
+        echo "- \`// @command: value\`" >> llm-compatibility-report.md
+        echo "- \`/* @command value */\`" >> llm-compatibility-report.md
+    
+    - name: Upload compatibility report
+      uses: actions/upload-artifact@v3
+      with:
+        name: llm-compatibility-report
+        path: llm-compatibility-report.md

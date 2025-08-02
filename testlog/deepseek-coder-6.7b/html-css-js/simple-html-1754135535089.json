@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-02T11:52:15.088Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "web",
+  "testCase": "simple-html",
+  "success": true,
+  "duration": 5974,
+  "originalCode": "\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Content</p>\n  <button onclick=\"doSomething()\">Click me</button>\n</div>",
+  "task": "Add accessibility attributes and proper semantic HTML",
+  "rawResponse": "Here is your modified code:\n\n```html\n<div class=\"card\" role=\"note\">\n  <h2 id=\"title\">Title</h2>\n  <p id=\"content\">Content</p>\n  <button onclick=\"doSomething()\" aria-labelledby=\"title content\">Click me</button>\n</div>\n```\n\nIn this code, I have added `role` to the div for better accessibility. The role \"note\" is used here because it describes the purpose of the element as a note or commentary. \n\nI also added ids to h2 and p tags which are used by aria-labelledby attribute in button tag to provide more context about what action will be performed when the button is clicked. This improves accessibility for users who use screen readers.\n",
+  "improvedSnippet": "",
+  "finalCode": "",
+  "qualityMetrics": {
+    "hasAriaLabels": false,
+    "hasSemanticHTML": false,
+    "hasProperStructure": false
+  }
+}

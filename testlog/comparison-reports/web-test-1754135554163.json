@@ -1,0 +1,129 @@
+{
+  "testType": "web-test",
+  "timestamp": "2025-08-02T11:52:34.163Z",
+  "testCases": [
+    {
+      "name": "simple-html",
+      "code": "\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Content</p>\n  <button onclick=\"doSomething()\">Click me</button>\n</div>",
+      "task": "Add accessibility attributes and proper semantic HTML"
+    },
+    {
+      "name": "css-styling",
+      "code": "\n.card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid gray;\n}",
+      "task": "Make it responsive and add modern CSS features"
+    },
+    {
+      "name": "javascript-function",
+      "code": "\nfunction validateForm(form) {\n  let isValid = true;\n  if (!form.email.value) {\n    isValid = false;\n  }\n  return isValid;\n}",
+      "task": "Add comprehensive validation and modern JavaScript patterns"
+    }
+  ],
+  "results": [
+    {
+      "timestamp": "2025-08-02T11:52:15.088Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "web",
+      "testCase": "simple-html",
+      "success": true,
+      "duration": 5974,
+      "originalCode": "\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Content</p>\n  <button onclick=\"doSomething()\">Click me</button>\n</div>",
+      "task": "Add accessibility attributes and proper semantic HTML",
+      "rawResponse": "Here is your modified code:\n\n```html\n<div class=\"card\" role=\"note\">\n  <h2 id=\"title\">Title</h2>\n  <p id=\"content\">Content</p>\n  <button onclick=\"doSomething()\" aria-labelledby=\"title content\">Click me</button>\n</div>\n```\n\nIn this code, I have added `role` to the div for better accessibility. The role \"note\" is used here because it describes the purpose of the element as a note or commentary. \n\nI also added ids to h2 and p tags which are used by aria-labelledby attribute in button tag to provide more context about what action will be performed when the button is clicked. This improves accessibility for users who use screen readers.\n",
+      "improvedSnippet": "",
+      "finalCode": "",
+      "qualityMetrics": {
+        "hasAriaLabels": false,
+        "hasSemanticHTML": false,
+        "hasProperStructure": false
+      }
+    },
+    {
+      "timestamp": "2025-08-02T11:52:20.283Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "web",
+      "testCase": "css-styling",
+      "success": false,
+      "duration": 5194,
+      "originalCode": "\n.card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid gray;\n}",
+      "task": "Make it responsive and add modern CSS features",
+      "error": "Unexpected token (2:0)"
+    },
+    {
+      "timestamp": "2025-08-02T11:52:23.893Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "web",
+      "testCase": "javascript-function",
+      "success": false,
+      "duration": 3607,
+      "originalCode": "\nfunction validateForm(form) {\n  let isValid = true;\n  if (!form.email.value) {\n    isValid = false;\n  }\n  return isValid;\n}",
+      "task": "Add comprehensive validation and modern JavaScript patterns",
+      "error": "Unexpected token (10:20)"
+    },
+    {
+      "timestamp": "2025-08-02T11:52:26.251Z",
+      "model": "starcoder2:3b",
+      "language": "web",
+      "testCase": "simple-html",
+      "success": true,
+      "duration": 2358,
+      "originalCode": "\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Content</p>\n  <button onclick=\"doSomething()\">Click me</button>\n</div>",
+      "task": "Add accessibility attributes and proper semantic HTML",
+      "rawResponse": "\n\n```javascript\n\n<div class=\"card\" role=\"region\">\n  <h2>Title</h2> // @role\n  <p>Content</p> // @role\n  <button onclick=\"doSomething()\">Click me</button>  // @role\n</div>\n```\n",
+      "improvedSnippet": "",
+      "finalCode": "",
+      "qualityMetrics": {
+        "hasAriaLabels": false,
+        "hasSemanticHTML": false,
+        "hasProperStructure": false
+      }
+    },
+    {
+      "timestamp": "2025-08-02T11:52:33.434Z",
+      "model": "starcoder2:3b",
+      "language": "web",
+      "testCase": "css-styling",
+      "success": false,
+      "duration": 7183,
+      "originalCode": "\n.card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid gray;\n}",
+      "task": "Make it responsive and add modern CSS features",
+      "error": "Unexpected token (2:0)"
+    },
+    {
+      "timestamp": "2025-08-02T11:52:34.163Z",
+      "model": "starcoder2:3b",
+      "language": "web",
+      "testCase": "javascript-function",
+      "success": true,
+      "duration": 728,
+      "originalCode": "\nfunction validateForm(form) {\n  let isValid = true;\n  if (!form.email.value) {\n    isValid = false;\n  }\n  return isValid;\n}",
+      "task": "Add comprehensive validation and modern JavaScript patterns",
+      "rawResponse": "\n\n```javascript\nfunction validateForm(form) {\n  let isValid = true;\n\n  // @command\n  if (!form.email.value || !form.password.value) {\n    isValid = false;\n  }\n\n  return isValid;\n}\n```\n",
+      "improvedSnippet": "function validateForm(form) {\n  let isValid = true;\n\n  // @command\n  if (!form.email.value || !form.password.value) {\n    isValid = false;\n  }\n\n  return isValid;\n}",
+      "finalCode": "function validateForm(form) {\n  let isValid = true;\n\n  // @command\n  if (!form.email.value || !form.password.value) {\n    isValid = false;\n  }\n\n  return isValid;\n}",
+      "qualityMetrics": {
+        "hasConstLet": true,
+        "hasArrowFunctions": false,
+        "hasAsyncAwait": false
+      }
+    }
+  ],
+  "summary": {
+    "deepseek-coder:6.7b": {
+      "total": 3,
+      "success": 1,
+      "avgDuration": 5974,
+      "qualityScores": [
+        0
+      ]
+    },
+    "starcoder2:3b": {
+      "total": 3,
+      "success": 2,
+      "avgDuration": 3086,
+      "qualityScores": [
+        0,
+        1
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-02T14:33:44.182Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "async-error-handling",
+  "task": "Add comprehensive error handling and retry logic",
+  "originalCode": "async function fetchUserData(userId) {\n  const response = await fetch('/api/users/' + userId);\n  const data = await response.json();\n  return data;\n}",
+  "rawResponse": "Here is your updated function with enhanced error handling, validation, and added retry logic using async/await pattern:\n\n```javascript\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic, try up to 3 times.\n    try {\n      response = await fetch('/api/users/' + userId);\n      \n      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);\n        \n      const data = await response.json();\n      return data;\n    } catch (err) {\n      console.error('Fetch failed, retrying...', err); // Log the error for debugging purposes.\n    }\n  }\n  \n  throw new Error('Failed to fetch user data after multiple attempts');\n}\n```\nThis function will now validate if `userId` is provided and throws an error if not. It also includes a retry mechanism that tries to fetch the data up to three times before finally throwing an error. The errors are logged for debugging purposes, but you can handle them as needed in your application.\n",
+  "improvedCode": "async function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID required');\n  \n  let response;\n  for (let i = 0; i < 3; i++) { // Retry logic, try up to 3 times.\n    try {\n      response = await fetch('/api/users/' + userId);\n      \n      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);\n        \n      const data = await response.json();\n      return data;\n    } catch (err) {\n      console.error('Fetch failed, retrying...', err); // Log the error for debugging purposes.\n    }\n  }\n  \n  throw new Error('Failed to fetch user data after multiple attempts');\n}",
+  "duration": 6295,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "hasAsync": true,
+    "taskCompleted": true,
+    "score": 1,
+    "rawScore": 1,
+    "maxScore": 1
+  },
+  "error": null
+}

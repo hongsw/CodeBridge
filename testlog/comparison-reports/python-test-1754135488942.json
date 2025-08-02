@@ -1,0 +1,76 @@
+{
+  "testType": "python-test",
+  "timestamp": "2025-08-02T11:51:28.942Z",
+  "testCases": [
+    {
+      "name": "basic-function",
+      "code": "\ndef calculate_average(numbers):\n    total = sum(numbers)\n    return total / len(numbers)",
+      "task": "Add type hints, docstring, and error handling for empty list"
+    },
+    {
+      "name": "class-method",
+      "code": "\nclass Calculator:\n    def __init__(self):\n        self.history = []\n    \n    def add(self, a, b):\n        result = a + b\n        self.history.append(result)\n        return result",
+      "task": "Add type hints, comprehensive docstrings, and input validation"
+    }
+  ],
+  "results": [
+    {
+      "timestamp": "2025-08-02T11:51:18.276Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "python",
+      "testCase": "basic-function",
+      "success": false,
+      "duration": 4892,
+      "originalCode": "\ndef calculate_average(numbers):\n    total = sum(numbers)\n    return total / len(numbers)",
+      "task": "Add type hints, docstring, and error handling for empty list",
+      "error": "Unexpected token (2:30)"
+    },
+    {
+      "timestamp": "2025-08-02T11:51:24.979Z",
+      "model": "deepseek-coder:6.7b",
+      "language": "python",
+      "testCase": "class-method",
+      "success": false,
+      "duration": 6700,
+      "originalCode": "\nclass Calculator:\n    def __init__(self):\n        self.history = []\n    \n    def add(self, a, b):\n        result = a + b\n        self.history.append(result)\n        return result",
+      "task": "Add type hints, comprehensive docstrings, and input validation",
+      "error": "Unexpected token, expected \"{\" (2:16)"
+    },
+    {
+      "timestamp": "2025-08-02T11:51:28.348Z",
+      "model": "starcoder2:3b",
+      "language": "python",
+      "testCase": "basic-function",
+      "success": false,
+      "duration": 3369,
+      "originalCode": "\ndef calculate_average(numbers):\n    total = sum(numbers)\n    return total / len(numbers)",
+      "task": "Add type hints, docstring, and error handling for empty list",
+      "error": "Unexpected token (2:30)"
+    },
+    {
+      "timestamp": "2025-08-02T11:51:28.942Z",
+      "model": "starcoder2:3b",
+      "language": "python",
+      "testCase": "class-method",
+      "success": false,
+      "duration": 593,
+      "originalCode": "\nclass Calculator:\n    def __init__(self):\n        self.history = []\n    \n    def add(self, a, b):\n        result = a + b\n        self.history.append(result)\n        return result",
+      "task": "Add type hints, comprehensive docstrings, and input validation",
+      "error": "Unexpected token, expected \"{\" (2:16)"
+    }
+  ],
+  "summary": {
+    "deepseek-coder:6.7b": {
+      "total": 2,
+      "success": 0,
+      "avgDuration": 0,
+      "qualityScores": []
+    },
+    "starcoder2:3b": {
+      "total": 2,
+      "success": 0,
+      "avgDuration": 0,
+      "qualityScores": []
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "agents": {
+    "claude": {
+      "enabled": true,
+      "format": ".claude/rules.md"
+    },
+    "cursor": {
+      "enabled": true,
+      "format": ".cursor/rules.mdc"
+    },
+    "gemini": {
+      "enabled": false,
+      "format": ".gemini/instructions.md"
+    },
+    "kiro": {
+      "enabled": false,
+      "format": ".kiro/specs"
+    }
+  },
+  "sync": {
+    "autoSync": true,
+    "debounceMs": 1000
+  },
+  "workspace": {
+    "maxWorktrees": 10,
+    "cleanupOnExit": true
+  }
+}

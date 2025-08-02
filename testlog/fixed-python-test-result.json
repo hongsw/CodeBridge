@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-02T12:01:58.751Z",
+  "originalCode": "\ndef calculate_average(numbers):\n    total = sum(numbers)\n    return total / len(numbers)",
+  "task": "Add type hints, docstring, and error handling for empty list",
+  "rawResponse": "Improved Python code:\n\n```python\nfrom typing import List\n\ndef calculate_average(numbers: List[float]) -> float:\n    \"\"\"Calculate average of a list of numbers\"\"\"\n    \n    if not numbers:  # error handling for empty list\n        raise ValueError(\"List must contain at least one number\")\n        \n    total = sum(numbers)\n    return total / len(numbers)\n```\n",
+  "improvedCode": "from typing import List\n\ndef calculate_average(numbers: List[float]) -> float:\n    \"\"\"Calculate average of a list of numbers\"\"\"\n    \n    if not numbers:  # error handling for empty list\n        raise ValueError(\"List must contain at least one number\")\n        \n    total = sum(numbers)\n    return total / len(numbers)",
+  "qualityMetrics": {
+    "hasTypeHints": true,
+    "hasDocstring": true,
+    "hasErrorHandling": true,
+    "hasImports": true
+  },
+  "qualityScore": 1,
+  "success": true
+}

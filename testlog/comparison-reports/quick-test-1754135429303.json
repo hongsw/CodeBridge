@@ -1,0 +1,32 @@
+{
+  "testType": "quick-javascript-test",
+  "timestamp": "2025-08-02T11:50:29.303Z",
+  "testCase": {
+    "originalCode": "\nfunction calculateDiscount(price, discountPercent) {\n  return price - (price * discountPercent / 100);\n}",
+    "task": "Add input validation and error handling"
+  },
+  "results": [
+    {
+      "timestamp": "2025-08-02T11:50:14.932Z",
+      "model": "deepseek-coder:6.7b",
+      "success": true,
+      "duration": 9445,
+      "originalCode": "\nfunction calculateDiscount(price, discountPercent) {\n  return price - (price * discountPercent / 100);\n}",
+      "task": "Add input validation and error handling",
+      "rawResponse": "Here is your updated function with added input validation and error handling:\n\n```javascript\nfunction calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number') {\n    throw new Error('Both price and discount percent should be numbers');\n  }\n  \n  if (price < 0 || discountPercent < 0) {\n    throw new Error('Price and discount percent must be positive values');\n  }\n\n  return price - (price * discountPercent / 100);\n}\n```\nIn this code, we first check that both `price` and `discountPercent` are numbers. If not, an error is thrown with a suitable message. Then we validate that neither of the inputs are negative as they should represent positive monetary values in real-world scenarios. Finally, we calculate and return the discounted price.\n",
+      "improvedSnippet": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number') {\n    throw new Error('Both price and discount percent should be numbers');\n  }\n\n  if (price < 0 || discountPercent < 0) {\n    throw new Error('Price and discount percent must be positive values');\n  }\n\n  return price - (price * discountPercent / 100);\n}",
+      "finalCode": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number') {\n    throw new Error('Both price and discount percent should be numbers');\n  }\n\n  if (price < 0 || discountPercent < 0) {\n    throw new Error('Price and discount percent must be positive values');\n  }\n\n  return price - price * discountPercent / 100;\n}"
+    },
+    {
+      "timestamp": "2025-08-02T11:50:29.303Z",
+      "model": "starcoder2:3b",
+      "success": true,
+      "duration": 14365,
+      "originalCode": "\nfunction calculateDiscount(price, discountPercent) {\n  return price - (price * discountPercent / 100);\n}",
+      "task": "Add input validation and error handling",
+      "rawResponse": "\n\nInput:\n```javascript\ncalculateDiscount(25, 30) // 15\ncalculateDiscount(25, '30') // 15\ncalculateDiscount('25', 30) // 15\ncalculateDiscount(25, null) // 25\ncalculateDiscount(null, 30) // 0\n```\n\nOutput:\n```javascript\nfunction calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n    return;\n\n  const discount = Math.round((price * discountPercent / 100));\n  \n  console.log(`The total price is ${price - discount}`);\n}\n```",
+      "improvedSnippet": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n    return;\n\n  const discount = Math.round((price * discountPercent / 100));\n\n  console.log(`The total price is ${price - discount}`);\n}",
+      "finalCode": "function calculateDiscount(price, discountPercent) {\n  if (typeof price !== 'number' || typeof discountPercent !== 'number')\n  return;\n\n  const discount = Math.round(price * discountPercent / 100);\n\n  console.log(`The total price is ${price - discount}`);\n}"
+    }
+  ]
+}

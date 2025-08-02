@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-02T14:34:49.156Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "basic-validation",
+  "task": "Add zero division check and type validation",
+  "originalCode": "function divide(a, b) {\n  return a / b;\n}",
+  "rawResponse": "\n\n```javascript\nfunction divide(a, b) {\n    if (b === 0 || typeof a !== 'number' || typeof b !== 'number') return NaN;\n    else return a / b;\n}\n```",
+  "improvedCode": "function divide(a, b) {\n    if (b === 0 || typeof a !== 'number' || typeof b !== 'number') return NaN;\n    else return a / b;\n}",
+  "duration": 2428,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "score": 0.2,
+    "rawScore": 0.2,
+    "maxScore": 1
+  },
+  "error": null
+}

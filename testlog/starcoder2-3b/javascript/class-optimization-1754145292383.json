@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T14:34:52.383Z",
+  "model": "starcoder2:3b",
+  "language": "javascript",
+  "scenario": "class-optimization",
+  "task": "Add off method, once method, and error handling",
+  "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+  "rawResponse": "\n\n## Solution\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index > -1) {\n      this.events[event].splice(index, 1);\n    }\n  }\n  \n  emit(event, data) {\n    if (!this.events[event]) return;\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}\n```",
+  "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n\n  off(event, callback) {\n    const index = this.events[event].indexOf(callback);\n\n    if (index > -1) {\n      this.events[event].splice(index, 1);\n    }\n  }\n  \n  emit(event, data) {\n    if (!this.events[event]) return;\n    \n    this.events[event].forEach(cb => cb(data));\n  }\n}",
+  "duration": 1970,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasModernSyntax": true,
+    "score": 0.4,
+    "rawScore": 0.4,
+    "maxScore": 1
+  },
+  "error": null
+}

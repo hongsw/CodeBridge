@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-02T14:34:52.668Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "scenario": "data-processing",
+  "task": "Add error handling, CSV library usage, and type hints",
+  "originalCode": "def process_csv(filename):\n    data = []\n    with open(filename, 'r') as f:\n        for line in f:\n            data.append(line.strip().split(','))\n    return data",
+  "rawResponse": "\n",
+  "improvedCode": "",
+  "duration": 142,
+  "success": false,
+  "qualityMetrics": {
+    "score": 0,
+    "rawScore": 0,
+    "maxScore": 1.2
+  },
+  "error": null
+}

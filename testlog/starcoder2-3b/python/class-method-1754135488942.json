@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-08-02T11:51:28.942Z",
+  "model": "starcoder2:3b",
+  "language": "python",
+  "testCase": "class-method",
+  "success": false,
+  "duration": 593,
+  "originalCode": "\nclass Calculator:\n    def __init__(self):\n        self.history = []\n    \n    def add(self, a, b):\n        result = a + b\n        self.history.append(result)\n        return result",
+  "task": "Add type hints, comprehensive docstrings, and input validation",
+  "error": "Unexpected token, expected \"{\" (2:16)"
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-02T14:34:59.940Z",
+  "model": "starcoder2:3b",
+  "language": "web",
+  "scenario": "html-accessibility",
+  "task": "Add proper labels, ARIA attributes, and semantic HTML",
+  "originalCode": "<form>\n  <input type=\"text\" placeholder=\"Email\">\n  <input type=\"password\" placeholder=\"Password\">\n  <button>Login</button>\n</form>",
+  "rawResponse": "\n\n```web\n<form>\n  <label for=\"email\">Email:</label><br/>\n  <input type=\"text\" id=\"email\"><br/>\n\n  <label for=\"password\">Password:</label><br/>\n  <input type=\"<PASSWORD>\" id=\"password\"><br/>\n  \n  <button>Login</button>\n</form>\n```\n",
+  "improvedCode": "web\n<form>\n  <label for=\"email\">Email:</label><br/>\n  <input type=\"text\" id=\"email\"><br/>\n\n  <label for=\"password\">Password:</label><br/>\n  <input type=\"<PASSWORD>\" id=\"password\"><br/>\n  \n  <button>Login</button>\n</form>",
+  "duration": 1016,
+  "success": false,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasLabels": true,
+    "score": 0.35714285714285715,
+    "rawScore": 0.5,
+    "maxScore": 1.4
+  },
+  "error": null
+}

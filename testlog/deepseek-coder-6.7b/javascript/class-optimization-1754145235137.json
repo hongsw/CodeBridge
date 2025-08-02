@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-08-02T14:33:55.136Z",
+  "model": "deepseek-coder:6.7b",
+  "language": "javascript",
+  "scenario": "class-optimization",
+  "task": "Add off method, once method, and error handling",
+  "originalCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(data));\n    }\n  }\n}",
+  "rawResponse": "Here is your modified class with added methods `off`, `once`, and some basic error handling:\n\n```javascript\nclass EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event name must be a string');\n    \n    if (!this.events[event]) return;\n    \n    this.events[event] = this.events[event].filter((cb) => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      self.off(event, fn);\n      callback.apply(this, arguments);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event name must be a string');\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    this.on(event, fn);\n  }\n  \n  emit(event, data) {\n    if (!this.events[event]) return;\n    \n    try {\n      this.events[event].forEach((cb) => cb(data));\n    } catch (error) {\n      console.error('Error in event emitter:', error);\n    }\n  }\n}\n```\n\nIn the `off` method, we filter out all callbacks that are not equal to the one provided and replace the array with this new array. In the `once` method, we wrap the original callback into a new function which removes itself from the event's listeners when called. If an error occurs within the callback, it is caught and logged to the console.\n",
+  "improvedCode": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  \n  on(event, callback) {\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    if (!this.events[event]) {\n      this.events[event] = [];\n    }\n    this.events[event].push(callback);\n  }\n  \n  off(event, callback) {\n    if (typeof event !== 'string') throw new TypeError('Event name must be a string');\n    \n    if (!this.events[event]) return;\n    \n    this.events[event] = this.events[event].filter((cb) => cb !== callback);\n  }\n  \n  once(event, callback) {\n    const self = this;\n    function fn() {\n      self.off(event, fn);\n      callback.apply(this, arguments);\n    }\n    \n    if (typeof event !== 'string') throw new TypeError('Event name must be a string');\n    if (typeof callback !== 'function') throw new TypeError('Callback must be a function');\n    \n    this.on(event, fn);\n  }\n  \n  emit(event, data) {\n    if (!this.events[event]) return;\n    \n    try {\n      this.events[event].forEach((cb) => cb(data));\n    } catch (error) {\n      console.error('Error in event emitter:', error);\n    }\n  }\n}",
+  "duration": 10948,
+  "success": true,
+  "qualityMetrics": {
+    "hasCode": true,
+    "hasErrorHandling": true,
+    "hasModernSyntax": true,
+    "taskCompleted": true,
+    "score": 0.8999999999999999,
+    "rawScore": 0.8999999999999999,
+    "maxScore": 1
+  },
+  "error": null
+}
