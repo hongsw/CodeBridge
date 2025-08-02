@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>웹페이지 통합 병합 예시</title>
+    <style>
+        /* 원본 스타일 */
+        .container {
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .button {
+            color: blue;
+            padding: 5px 10px;
+            border: 1px solid blue;
+        }
+        
+        .content {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>원본 페이지</h1>
+        <div class="content">
+            <p>이것은 원본 콘텐츠입니다.</p>
+            <button class="button" onclick="handleClick()">클릭하세요</button>
+        </div>
+    </div>
+
+    <script>
+        class PageController {
+            constructor() {
+                this.count = 0;
+            }
+            
+            init() {
+                console.log('페이지 초기화');
+            }
+            
+            updateCount() {
+                this.count++;
+                console.log('Count:', this.count);
+            }
+        }
+        
+        function handleClick() {
+            console.log('버튼 클릭됨');
+        }
+    </script>
+</body>
+</html>
+
+<!-- 
+스니펫 예시 (별도 파일로 제공될 부분):
+
+<style>
+    /* @override */
+    .button {
+        color: white;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    /* @add */
+    .button:hover {
+        background-color: #0056b3;
+    }
+    
+    /* @add */
+    .button:active {
+        transform: translateY(1px);
+    }
+    
+    /* @media mobile */
+    /* @add */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        
+        .button {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    // @method-update
+    // @async
+    init() {
+        console.log('페이지 초기화 - 개선된 버전');
+        this.setupEventListeners();
+        this.loadData();
+    }
+    
+    // @add
+    setupEventListeners() {
+        document.querySelector('.button').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.handleButtonClick();
+        });
+        
+        // 키보드 접근성 추가
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.classList.contains('button')) {
+                this.handleButtonClick();
+            }
+        });
+    }
+    
+    // @add
+    async loadData() {
+        try {
+            const response = await fetch('/api/data');
+            const data = await response.json();
+            console.log('데이터 로드 완료:', data);
+        } catch (error) {
+            console.error('데이터 로드 실패:', error);
+        }
+    }
+    
+    // @add
+    handleButtonClick() {
+        this.updateCount();
+        this.showNotification('버튼이 클릭되었습니다!');
+    }
+    
+    // @add
+    showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+</script>
+
+<!-- @add-to-head -->
+<style>
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 4px;
+        animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+병합 후 예상 결과:
+- CSS: 버튼 스타일이 현대적으로 업데이트되고 호버/액티브 효과 추가
+- 반응형 디자인 추가 (모바일 미디어 쿼리)
+- JavaScript: 비동기 초기화, 이벤트 리스너 설정, API 데이터 로드
+- 접근성 개선 (키보드 지원)
+- 알림 기능 추가
+-->
