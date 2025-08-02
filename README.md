@@ -70,9 +70,20 @@ CodeBridge는 AST(Abstract Syntax Tree) 기반으로 다중 언어 코드를 지
 ## 🛠️ 빠른 시작
 
 ### 1. 기본 설치
+
+#### npm 패키지 설치 (권장)
+```bash
+# 글로벌 설치
+npm install -g codebridge-ai
+
+# 또는 프로젝트별 설치
+npm install codebridge-ai
+```
+
+#### 소스 코드 설치
 ```bash
 # CodeBridge 코어 설치
-git clone https://github.com/your-repo/CodeBridge.git
+git clone https://github.com/hongsw/CodeBridge.git
 cd CodeBridge
 npm install
 
@@ -100,7 +111,10 @@ ollama pull starcoder2:3b
 
 #### 기본 JavaScript 코드 개선
 ```javascript
-const OllamaCodeBridge = require('./integrations/ollama-integration');
+// npm 설치 후
+const OllamaCodeBridge = require('codebridge-ai/integrations/ollama-integration');
+// 또는 소스코드 설치 후
+// const OllamaCodeBridge = require('./integrations/ollama-integration');
 
 // Ollama + CodeBridge 통합 인스턴스 생성
 const ollamaCodeBridge = new OllamaCodeBridge({
@@ -142,7 +156,11 @@ const result = await ollamaCodeBridge.improveCode(
 
 ### 4. 기존 CodeBridge 기능 (AST 병합)
 ```javascript
-const CodeProcessor = require('codebridge');
+// npm 설치 후
+const CodeProcessor = require('codebridge-ai');
+// 또는 소스코드 설치 후  
+// const CodeProcessor = require('codebridge');
+
 const processor = new CodeProcessor();
 
 // 전통적인 AST 기반 병합
