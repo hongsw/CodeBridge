@@ -154,8 +154,11 @@ Keep responses concise and focused on the code.`;
       let improvedSnippet;
       let fileType = options.fileType || 'js';
       
-      // 웹 기술인 경우에만 웹 전처리기 사용
-      if (fileType === 'web' || fileType === 'html' || fileType === 'css') {
+      // 사용자 정의 전처리기가 있는 경우
+      if (this.customPreprocessor) {
+        improvedSnippet = this.customPreprocessor(rawResponse, fileType);
+      } else if (fileType === 'web' || fileType === 'html' || fileType === 'css') {
+        // 웹 기술인 경우에만 웹 전처리기 사용
         const webType = this.detectWebType(originalCode, instruction);
         if (webType) {
           console.log(`🌐 웹 기술 감지: ${webType}`);

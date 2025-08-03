@@ -3,11 +3,15 @@ const babel = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require('@babel/types');
+const Parser = require('tree-sitter');
+const Rust = require('tree-sitter-rust');
 
 class CodeBridge {
   constructor() {
     this.htmlParser = parse5;
     this.jsParser = babel;
+    this.rustParser = new Parser();
+    this.rustParser.setLanguage(Rust);
   }
 
   /**
@@ -388,6 +392,9 @@ class CodeBridge {
         return this.processJS(originalCode, snippetCode);
       case 'css':
         return this.processCSS(originalCode, snippetCode);
+      case 'rust':
+      case 'rs':
+        return this.processRust(originalCode, snippetCode);
       default:
         throw new Error(`Unsupported file type: ${fileType}`);
     }
@@ -470,6 +477,232 @@ class CodeBridge {
    */
   escapeRegex(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  /**
+   * Rust 코드를 파싱하고 처리합니다.
+   */
+  processRust(originalCode, snippetCode) {
+    try {
+      console.log('🦀 Rust 코드 처리 시작');
+      
+      // 원본 코드 파싱
+      const originalTree = this.rustParser.parse(originalCode);
+      
+      // 스니펫 전처리 (함수만 있는 경우 처리)
+      const processedSnippet = this.preprocessRustSnippet(snippetCode);
+      
+      // 스니펫 파싱
+      const snippetTree = this.rustParser.parse(processedSnippet);
+      
+      // Rust AST 병합
+      const mergedCode = this.mergeRustNodes(originalCode, processedSnippet, originalTree, snippetTree);
+      
+      console.log('✅ Rust 처리 완료');
+      return mergedCode;
+    } catch (error) {
+      console.error('Rust 파싱 오류:', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Rust 스니펫 전처리 (함수만 있는 경우 impl 블록으로 감싸기)
+   */
+  preprocessRustSnippet(snippetCode) {
+    const trimmed = snippetCode.trim();
+    
+    // 함수만 있는지 확인 (fn으로 시작하는 경우)
+    if (trimmed.startsWith('fn ') || trimmed.startsWith('pub fn ')) {
+      return `impl TemporaryStruct {\n    ${trimmed}\n}`;
+    }
+    
+    return snippetCode;
+  }
+
+  /**
+   * Rust AST 노드들을 병합합니다.
+   */
+  mergeRustNodes(originalCode, snippetCode, originalTree, snippetTree) {
+    const commands = this.extractRustCommands(snippetCode);
+    const originalFunctions = this.extractRustFunctions(originalTree, originalCode);
+    const snippetFunctions = this.extractRustFunctions(snippetTree, snippetCode);
+    
+    let mergedCode = originalCode;
+    
+    // 스니펫의 각 함수 처리
+    for (const [funcName, funcNode] of snippetFunctions) {
+      const funcCommands = commands.get(funcName) || {};
+      
+      if (funcCommands.delete) {
+        // 함수 삭제
+        mergedCode = this.removeRustFunction(mergedCode, funcName, originalFunctions.get(funcName));
+      } else if (originalFunctions.has(funcName)) {
+        // 기존 함수 수정
+        mergedCode = this.replaceRustFunction(mergedCode, funcName, funcNode, originalFunctions.get(funcName), funcCommands);
+      } else {
+        // 새 함수 추가
+        mergedCode = this.addRustFunction(mergedCode, funcName, funcNode, funcCommands);
+      }
+    }
+    
+    return mergedCode;
+  }
+
+  /**
+   * Rust 코드에서 주석 명령어를 추출합니다.
+   */
+  extractRustCommands(code) {
+    const commands = new Map();
+    const lines = code.split('\n');
+    let currentFunction = null;
+    
+    lines.forEach((line, index) => {
+      // 주석 명령어 확인
+      const commentMatch = line.match(/\/\/\s*@([a-zA-Z]+)(?:\s+(.+))?/);
+      if (commentMatch) {
+        const [, command, value] = commentMatch;
+        
+        // 다음 줄에 함수가 있는지 확인
+        if (index + 1 < lines.length) {
+          const nextLine = lines[index + 1];
+          const funcMatch = nextLine.match(/(?:pub\s+)?fn\s+([a-zA-Z_][a-zA-Z0-9_]*)/);
+          if (funcMatch) {
+            currentFunction = funcMatch[1];
+            if (!commands.has(currentFunction)) {
+              commands.set(currentFunction, {});
+            }
+            
+            switch (command.toLowerCase()) {
+              case 'visibility':
+              case 'vis':
+                commands.get(currentFunction).visibility = value; // pub, pub(crate), etc
+                break;
+              case 'rename':
+                commands.get(currentFunction).rename = value;
+                break;
+              case 'delete':
+                commands.get(currentFunction).delete = true;
+                break;
+              case 'async':
+                commands.get(currentFunction).async = true;
+                break;
+              case 'unsafe':
+                commands.get(currentFunction).unsafe = true;
+                break;
+              case 'params':
+                commands.get(currentFunction).params = value;
+                break;
+              case 'return':
+                commands.get(currentFunction).returnType = value;
+                break;
+            }
+          }
+        }
+      }
+    });
+    
+    return commands;
+  }
+
+  /**
+   * Rust AST에서 함수들을 추출합니다.
+   */
+  extractRustFunctions(tree, code) {
+    const functions = new Map();
+    const cursor = tree.walk();
+    
+    const visitNode = () => {
+      const node = cursor.currentNode;
+      
+      if (node.type === 'function_item') {
+        const nameNode = node.childForFieldName('name');
+        if (nameNode) {
+          const funcName = code.substring(nameNode.startIndex, nameNode.endIndex);
+          functions.set(funcName, {
+            node: node,
+            startIndex: node.startIndex,
+            endIndex: node.endIndex,
+            text: code.substring(node.startIndex, node.endIndex)
+          });
+        }
+      }
+      
+      if (cursor.gotoFirstChild()) {
+        do {
+          visitNode();
+        } while (cursor.gotoNextSibling());
+        cursor.gotoParent();
+      }
+    };
+    
+    visitNode();
+    return functions;
+  }
+
+  /**
+   * Rust 함수를 제거합니다.
+   */
+  removeRustFunction(code, funcName, funcInfo) {
+    if (!funcInfo) return code;
+    
+    const before = code.substring(0, funcInfo.startIndex);
+    const after = code.substring(funcInfo.endIndex);
+    
+    // 앞뒤 빈 줄 정리
+    return before.trimEnd() + '\n' + after.trimStart();
+  }
+
+  /**
+   * Rust 함수를 교체합니다.
+   */
+  replaceRustFunction(code, funcName, newFuncNode, originalFuncInfo, commands) {
+    const before = code.substring(0, originalFuncInfo.startIndex);
+    const after = code.substring(originalFuncInfo.endIndex);
+    
+    let newFuncText = newFuncNode.text;
+    
+    // 명령어 적용
+    if (commands.visibility) {
+      newFuncText = newFuncText.replace(/^(\s*)(?:pub\s+)?fn/, `$1${commands.visibility} fn`);
+    }
+    
+    if (commands.async) {
+      newFuncText = newFuncText.replace(/^(\s*(?:pub\s+)?)fn/, '$1async fn');
+    }
+    
+    if (commands.unsafe) {
+      newFuncText = newFuncText.replace(/^(\s*(?:pub\s+)?(?:async\s+)?)fn/, '$1unsafe fn');
+    }
+    
+    if (commands.rename) {
+      newFuncText = newFuncText.replace(new RegExp(`fn\\s+${funcName}`), `fn ${commands.rename}`);
+    }
+    
+    return before + newFuncText + after;
+  }
+
+  /**
+   * Rust 함수를 추가합니다.
+   */
+  addRustFunction(code, funcName, funcNode, commands) {
+    let newFuncText = funcNode.text;
+    
+    // impl 블록 제거 (임시로 추가된 경우)
+    if (newFuncText.includes('impl TemporaryStruct')) {
+      const match = newFuncText.match(/impl\s+TemporaryStruct\s*\{([\s\S]*)\}/);
+      if (match) {
+        newFuncText = match[1].trim();
+      }
+    }
+    
+    // 명령어 적용
+    if (commands.visibility) {
+      newFuncText = newFuncText.replace(/^(\s*)(?:pub\s+)?fn/, `$1${commands.visibility} fn`);
+    }
+    
+    // 적절한 위치에 함수 추가 (파일 끝에)
+    return code.trimEnd() + '\n\n' + newFuncText + '\n';
   }
 }
 

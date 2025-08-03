@@ -1,0 +1,247 @@
+[
+  {
+    "model": "deepseek-coder:6.7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0,
+      "avgScore": 0,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "qwen2.5-coder:7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0,
+      "avgScore": 0,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "llama3.2:3b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0,
+      "avgScore": 0,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "gemma2:2b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0,
+      "avgScore": 0,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "llama3.1:8b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "bridge.processWithLLM is not a function",
+        "score": 0,
+        "analysis": null,
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0,
+      "avgScore": 0,
+      "successRate": "0.0"
+    }
+  }
+]

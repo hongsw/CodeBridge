@@ -1,0 +1,148 @@
+[
+  {
+    "model": "deepseek-coder:6.7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 3.049,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 3.853,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 1.875,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 2.346,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 2.7807500000000003,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "starcoder2:3b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 3.021,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 1.297,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0.404,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0.892,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 1.4035,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  }
+]

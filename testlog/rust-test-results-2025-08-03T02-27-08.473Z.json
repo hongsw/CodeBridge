@@ -1,0 +1,164 @@
+[
+  {
+    "model": "deepseek-coder:6.7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": true,
+        "responseTime": 6.448,
+        "error": null,
+        "score": 0.75,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": true,
+          "details": {},
+          "score": 0.75
+        },
+        "result": "\nfn main() {\n    println!(\"Hello, world!\");\n}\n\nfn greet(name: &str) {\n    println!(\"Hello, {}!\", name);\n}\n\nfn calculate_sum(a: i32, b: i32) -> i32 {\n    a + b\n}\n..."
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": true,
+        "responseTime": 7.726,
+        "error": null,
+        "score": 0.75,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": true,
+          "details": {},
+          "score": 0.75
+        },
+        "result": "\nasync fn process_data(mut data: Vec<i32>) -> Pin<Box<dyn Future<Output = i32>>> {\n    Box::pin(async {\n        println!(\"Processing {} items\", data.len());\n        let result = data.iter().sum();\n   ..."
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": true,
+        "responseTime": 1.894,
+        "error": null,
+        "score": 0.5,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {},
+          "score": 0.5
+        },
+        "result": "\nfn helper_function() {\n    println!(\"This is a helper\");\n}\nfn main() {\n    helper_function();\n}fn main()  {\n    helper_function();\n}..."
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": true,
+        "responseTime": 3.725,
+        "error": null,
+        "score": 1,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": true,
+          "hasCorrectImplementation": true,
+          "details": {},
+          "score": 1
+        },
+        "result": "\npub struct Calculator {\n    value: f64,\n}\n\nimpl Calculator {\n    pub fn add(&mut self, x: f64) {\n        self.value += x;\n    }\n}\n\npub fn new() -> Self {\n        Self { value: 0.0 }\n    }\n..."
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 4,
+      "failed": 0,
+      "avgResponseTime": 4.94825,
+      "avgScore": 0.75,
+      "successRate": "100.0"
+    }
+  },
+  {
+    "model": "starcoder2:3b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": true,
+        "responseTime": 2.746,
+        "error": null,
+        "score": 0.25,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {},
+          "score": 0.25
+        },
+        "result": "\nfn main() {\n    println!(\"Hello, world!\");\n}\n\npub fn greet(name: &str) {\n    println!(\"Hello, {}!\", name);\n}\n\nfn it_works() {\n    assert_eq!(2 + 2, 4);\n}\n..."
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": true,
+        "responseTime": 1.143,
+        "error": null,
+        "score": 0.75,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": true,
+          "details": {},
+          "score": 0.75
+        },
+        "result": "\nfn process_data(data: Vec<i32>) -> i32 {\n    data.iter().sum()\n}\n\nfn main() {\n    let numbers = vec![1, 2, 3, 4, 5];\n    let result = process_data(numbers);\n    println!(\"Sum: {}\", result);\n}..."
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0.361,
+        "error": null,
+        "score": 0.25,
+        "analysis": {
+          "success": false,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {},
+          "score": 0.25
+        },
+        "result": "\nfn helper_function() {\n    println!(\"This is a helper\");\n}\n\nfn deprecated_function() {\n    println!(\"This function is deprecated\");\n}\n\nfn main() {\n    helper_function();\n}..."
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": true,
+        "responseTime": 0.433,
+        "error": null,
+        "score": 0.75,
+        "analysis": {
+          "success": true,
+          "error": null,
+          "hasExpectedFunction": true,
+          "hasExpectedModifier": true,
+          "hasCorrectImplementation": false,
+          "details": {},
+          "score": 0.75
+        },
+        "result": "\npub struct Calculator {\n    value: f64,\n}\n\nimpl Calculator {\n    pub fn add(&mut self, x: f64) {\n        self.value += x;\n    }\n}\n\npub fn new(self) -> Self {\n    return Self{value:0};\n}\n..."
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 3,
+      "failed": 1,
+      "avgResponseTime": 1.17075,
+      "avgScore": 0.5,
+      "successRate": "75.0"
+    }
+  }
+]

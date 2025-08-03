@@ -3,7 +3,24 @@
   "version": "1.1.0",
   "main": "main.js",
   "description": "Complete fullstack AI coding platform with AST-based code integration and local LLM support. Now with comprehensive web technology support (HTML/CSS/JS) plus JavaScript, Python, Rust, and C++.",
-  "keywords": ["ast", "code-merge", "llm", "ollama", "babel", "javascript", "python", "rust", "cpp", "html", "css", "web-development", "fullstack", "ai-coding", "local-ai", "privacy"],
+  "keywords": [
+    "ast",
+    "code-merge",
+    "llm",
+    "ollama",
+    "babel",
+    "javascript",
+    "python",
+    "rust",
+    "cpp",
+    "html",
+    "css",
+    "web-development",
+    "fullstack",
+    "ai-coding",
+    "local-ai",
+    "privacy"
+  ],
   "author": "Seungwoo Hong <hongmartin@example.com>",
   "license": "MIT",
   "repository": {
@@ -38,7 +55,9 @@
     "@babel/parser": "^7.26.8",
     "@babel/traverse": "^7.26.8",
     "@babel/types": "^7.26.8",
-    "parse5": "^7.2.1"
+    "parse5": "^7.2.1",
+    "tree-sitter": "^0.22.4",
+    "tree-sitter-rust": "^0.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.8",

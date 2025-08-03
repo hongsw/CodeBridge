@@ -1,0 +1,367 @@
+[
+  {
+    "model": "deepseek-coder:6.7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 6.847,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 7.898,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 2.835,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 2.349,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 4.9822500000000005,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "qwen2.5-coder:7b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0.002,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0.00125,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "llama3.2:3b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0.0005,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "gemma2:2b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0.0005,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  },
+  {
+    "model": "llama3.1:8b",
+    "tests": [
+      {
+        "testName": "Rust - 새 함수 추가",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 수정",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - 함수 삭제",
+        "success": false,
+        "responseTime": 0.001,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      },
+      {
+        "testName": "Rust - impl 블록 추가",
+        "success": false,
+        "responseTime": 0,
+        "error": "Empty or invalid result",
+        "analysis": {
+          "success": false,
+          "error": "Empty or invalid result",
+          "hasExpectedFunction": false,
+          "hasExpectedModifier": false,
+          "hasCorrectImplementation": false,
+          "details": {}
+        },
+        "result": null
+      }
+    ],
+    "summary": {
+      "total": 4,
+      "success": 0,
+      "failed": 4,
+      "avgResponseTime": 0.0005,
+      "avgScore": null,
+      "successRate": "0.0"
+    }
+  }
+]

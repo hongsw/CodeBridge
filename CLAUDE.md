@@ -10,6 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 node examples/usage-example.js
 node examples/comment-example.js
 node examples/advanced-example.js
+node examples/rust-example.js
 ```
 
 ### Testing
@@ -21,15 +22,16 @@ npm install --save-dev jest
 
 ## Architecture Overview
 
-CodeBridge is an AST-based code merging tool that processes JavaScript and HTML snippets by parsing them into Abstract Syntax Trees and intelligently merging them with original code.
+CodeBridge is an AST-based code merging tool that processes JavaScript, HTML, CSS, and Rust snippets by parsing them into Abstract Syntax Trees and intelligently merging them with original code.
 
 ### Core Components
 
 **CodeBridge (code-bridge.js)**
-- Main class handling both JavaScript and HTML processing
+- Main class handling JavaScript, HTML, CSS, and Rust processing
 - Uses Babel for JavaScript AST manipulation (@babel/parser, @babel/traverse, @babel/generator)
 - Uses parse5 for HTML parsing and serialization
-- Supports comment-based command directives for method manipulation
+- Uses tree-sitter for Rust AST manipulation (tree-sitter, tree-sitter-rust)
+- Supports comment-based command directives for method/function manipulation
 
 ### Key Architectural Patterns
 
@@ -70,10 +72,19 @@ The processor includes detailed error reporting with:
 3. Update documentation with new command syntax
 
 ### Extending Language Support
-Currently supports JavaScript and HTML. To add new languages:
+Currently supports JavaScript, HTML, CSS, and Rust. To add new languages:
 1. Add appropriate parser dependency
 2. Implement new `process[Language]()` method
 3. Update `process()` method switch statement
+
+### Rust-Specific Comment Commands
+- `@visibility [pub|pub(crate)|pub(super)]` - Set visibility modifier
+- `@async` - Make function async
+- `@unsafe` - Make function unsafe
+- `@rename [newName]` - Rename function
+- `@delete` - Remove function
+- `@params [param1: type1, param2: type2]` - Update function parameters
+- `@return [Type]` - Update return type
 
 ### Debugging AST Transformations
 - Use `console.log(JSON.stringify(ast, null, 2))` to inspect AST structure
