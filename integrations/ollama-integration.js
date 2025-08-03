@@ -175,8 +175,17 @@ Keep responses concise and focused on the code.`;
       
       console.log('🔄 전처리 완료, CodeBridge로 병합 중...');
       
-      // CodeBridge로 병합
-      const result = this.codeBridge.process(originalCode, improvedSnippet, fileType);
+      // 언어 감지
+      const language = this.detectLanguage(originalCode);
+      let result;
+      
+      // JavaScript와 HTML만 CodeBridge 사용, 나머지는 텍스트 병합
+      if (language === 'javascript' || language === 'html') {
+        result = this.codeBridge.process(originalCode, improvedSnippet, fileType);
+      } else {
+        // Python, Rust, C++ 등은 개선된 코드를 그대로 사용
+        result = improvedSnippet;
+      }
       
       return {
         success: true,
@@ -195,6 +204,27 @@ Keep responses concise and focused on the code.`;
         instruction,
         model: this.model
       };
+    }
+  }
+  
+  /**
+   * 언어 감지
+   */
+  detectLanguage(code) {
+    const trimmedCode = code.trim().toLowerCase();
+    
+    if (trimmedCode.includes('def ') || trimmedCode.includes('import ') || trimmedCode.includes('from ')) {
+      return 'python';
+    } else if (trimmedCode.includes('function ') || trimmedCode.includes('const ') || trimmedCode.includes('let ')) {
+      return 'javascript';
+    } else if (trimmedCode.includes('class ') && trimmedCode.includes('public:')) {
+      return 'cpp';
+    } else if (trimmedCode.includes('fn ') || trimmedCode.includes('impl ') || trimmedCode.includes('struct ')) {
+      return 'rust';
+    } else if (trimmedCode.includes('<html') || trimmedCode.includes('<div')) {
+      return 'html';
+    } else {
+      return 'javascript'; // 기본값
     }
   }
   

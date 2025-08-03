@@ -1,0 +1,478 @@
+{
+  "timestamp": "2025-08-03T03:44:32.822Z",
+  "models": {
+    "skt/A.X-3.1": {
+      "connectionFailed": true,
+      "results": []
+    },
+    "deepseek-coder:6.7b": {
+      "model": "deepseek-coder:6.7b",
+      "type": "ollama",
+      "results": [
+        {
+          "success": true,
+          "originalCode": "\nfunction divide(a, b) {\n  return a / b;\n}",
+          "instruction": "Add comprehensive error handling and input validation",
+          "rawResponse": "Here is your updated function with added error handling and input validation:\n\n```javascript\nfunction divide(a, b) {\n    // @params a, b\n    \n    if (typeof a !== 'number' || typeof b !== 'number') {\n        throw new Error('Both inputs must be of type number');\n    }\n  \n    if (b === 0) {\n        throw new Error(\"Division by zero is not allowed\");\n    }\n    \n    return a / b;  // @decorator cache, @decorator validate\n}\n```\nIn this updated function:\n- We check the type of both inputs to ensure they are numbers. If either input is not a number, an error is thrown.\n- We then check if the divisor (b) is zero. In mathematics, division by zero is undefined and hence we throw an error in such cases. \n- The original function code has been decorated with `@decorator cache` and `@decorator validate` to improve performance and validation of the inputs respectively.\n",
+          "improvedSnippet": "function divide(a, b) {\n    // @params a, b\n\n    if (typeof a !== 'number' || typeof b !== 'number') {\n        throw new Error('Both inputs must be of type number');\n    }\n\n    if (b === 0) {\n        throw new Error(\"Division by zero is not allowed\");\n    }\n\n    return a / b;  // @decorator cache, @decorator validate\n}",
+          "finalCode": "function divide(a, b) {\n  // @params a, b\n\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both inputs must be of type number');\n  }\n\n  if (b === 0) {\n    throw new Error(\"Division by zero is not allowed\");\n  }\n\n  return a / b; // @decorator cache, @decorator validate\n}",
+          "model": "deepseek-coder:6.7b",
+          "language": "javascript",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfunction fetchUserData(userId) {\n  return fetch('/api/users/' + userId)\n    .then(response => response.json())\n    .then(data => data);\n}",
+          "instruction": "Convert to async/await with proper error handling",
+          "rawResponse": "Here is your modified function:\n\n```javascript\nasync function fetchUserData(userId) {\n    try {\n        const response = await fetch('/api/users/' + userId);\n        if (!response.ok) throw new Error('Network response was not ok');\n        const data = await response.json();\n        return data;\n    } catch (error) {\n        console.log(`There has been a problem with your fetch operation: ${error}`);\n    }\n}\n```\n\nThis code is an asynchronous version of the original function, using async/await for better readability and error handling. It also includes a try-catch block to handle any errors that might occur during the fetch operation. If there's a problem with the network response or if JSON parsing fails, it logs the error message to the console.\n",
+          "improvedSnippet": "async function fetchUserData(userId) {\n    try {\n        const response = await fetch('/api/users/' + userId);\n        if (!response.ok) throw new Error('Network response was not ok');\n        const data = await response.json();\n        return data;\n    } catch (error) {\n        console.log(`There has been a problem with your fetch operation: ${error}`);\n    }\n}",
+          "finalCode": "async function fetchUserData(userId) {\n  try {\n    const response = await fetch('/api/users/' + userId);\n    if (!response.ok) throw new Error('Network response was not ok');\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.log(`There has been a problem with your fetch operation: ${error}`);\n  }\n}",
+          "model": "deepseek-coder:6.7b",
+          "language": "javascript",
+          "scenario": "async-await"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass Calculator {\n  add(a, b) {\n    return a + b;\n  }\n  \n  multiply(a, b) {\n    return a * b;\n  }\n}",
+          "instruction": "한국어 주석과 JSDoc을 추가하고 에러 처리를 개선해주세요",
+          "rawResponse": "```javascript\n/**\n * Calculator class\n */\nclass Calculator {\n  \n  /**\n   * Adds two numbers and returns the result\n   * @param {number} a - The first number to add\n   * @param {number} b - The second number to add\n   * @returns {number} The sum of a and b\n   * @throws {Error} If either a or b is not a number\n   */\n  // 주석이 한국어로 변경되었습니다.\n  add(a, b) {\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both inputs must be numbers');\n    return a + b;\n  }\n  \n  /**\n   * Multiplies two numbers and returns the result\n   * @param {number} a - The first number to multiply\n   * @param {number} b - The second number to multiply\n   * @returns {number} The product of a and b\n   * @throws {Error} If either a or b is not a number\n   */\n  // 주석이 한국어로 변경되었습니다.\n  multiply(a, b) {\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both inputs must be numbers');\n    return a * b;\n  }\n}\n```\n",
+          "improvedSnippet": "add(a, b) {\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both inputs must be numbers');\n    return a + b;\n  }",
+          "finalCode": "class TemporaryClass {add(a, b) {\n    if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both inputs must be numbers');\n    return a + b;\n  }}",
+          "model": "deepseek-coder:6.7b",
+          "language": "javascript",
+          "scenario": "korean-comments"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+          "instruction": "Add type hints, memoization, and comprehensive docstring",
+          "rawResponse": "Here is your Python code with added improvements:\n\n```python\nfrom functools import lru_cache\nfrom typing import Any\n\n@lru_cache(maxsize=None) // @decorator cache\ndef fibonacci(n: int) -> Any:  // @params n: int, returns: Any\n    \"\"\"\n    A function to calculate the Fibonacci series.\n    \n    Args:\n        n (int): The position of number in the series.\n        \n    Returns:\n        Any: The value at the given position in the series.\n    \"\"\"  // @decorator docstring\n    if n <= 1:  // @params n -> int\n        return n  // @return type hint\n    else:  // @else branch\n        return fibonacci(n-1) + fibonacci(n-2)  // @return type hint, recursive calls\n```\nThis code uses the `lru_cache` decorator from Python's built-in `functools` module to add memoization. This means that if you call `fibonacci(10)` twice in a row, it will calculate and store its result for future calls to `fibonacci(10)`, reducing the number of recursive calls significantly.\n\nThe type hints are added using Python's built-in `typing` module. This makes your code more readable by providing information about what types of values a function can accept and return. In this case, it specifies that the argument `n` should be an integer (`int`), and that the function will return any type (`Any`).\n\nThe docstring provides documentation for the function, explaining its purpose, arguments, and return value. This is useful both for understanding what a function does and how to use it.\n",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "deepseek-coder:6.7b",
+          "language": "python",
+          "scenario": "type-hints"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef read_file(filename):\n    file = open(filename, 'r')\n    content = file.read()\n    file.close()\n    return content",
+          "instruction": "Add proper exception handling and use context managers",
+          "rawResponse": "Here is your Python code with added exception handling using try-except block, and a context manager to handle file operations:\n\n```python\n// @decorator cache\n// @decorator validate\ndef read_file(filename):\n    // @rename safe_read_file\n    // @params filename\n    try:\n        with open(filename, 'r') as file:\n            content = file.read()\n        return content\n    except FileNotFoundError:\n        print(\"File not found.\")\n        return None\n    except IOError:\n        print(\"An error occurred while reading the file.\")\n        return None\n```\nIn this code, we use a context manager `with open(filename, 'r') as file` to handle opening and closing of files. This ensures that the file is properly closed after it has been used, even if an exception occurs within the block. The try-except blocks are used for handling exceptions: FileNotFoundError is raised when the specified file does not exist, IOError is a general error indicating that an input/output operation failed.\n",
+          "improvedSnippet": "// @decorator cache\n// @decorator validate\n    // @rename safe_read_file\n    // @params filename",
+          "finalCode": "// @decorator cache\n// @decorator validate\n    // @rename safe_read_file\n    // @params filename",
+          "model": "deepseek-coder:6.7b",
+          "language": "python",
+          "scenario": "exception-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n    \n    def deposit(self, amount):\n        self.balance += amount\n    \n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "instruction": "한국어 독스트링을 추가하고 타입 힌트와 에러 처리를 개선해주세요",
+          "rawResponse": "Here is your Python code with Korean docstrings and type hints, as well as some error handling improvements:\n\n```python\nclass BankAccount:\n    def __init__(self, balance: float = 0):\n        \"\"\"\n        기본적인 통화는 USD(US Dollar)로 설정됩니다. \n        초기 계좌 잔액은 0으로 설정되며, 통화는 __init__() 메소드의 balance 인수에서 지정할 수 있습니다.\n        \"\"\"\n        if not isinstance(balance, (int, float)):\n            raise TypeError(\"계좌 잔액이 int 또는 float 타입이어야 합니다.\")\n        self.balance = balance\n    \n    def deposit(self, amount: float) -> None:\n        \"\"\"\n        계좌에 특정 금액을 입금합니다.\n        \n        :param amount: 입금하려는 금액\n        :type amount: float\n        \"\"\"\n        if not isinstance(amount, (int, float)):\n            raise TypeError(\"입금 금액이 int 또는 float 타입이어야 합니다.\")\n        self.balance += amount\n    \n    def withdraw(self, amount: float) -> bool:\n        \"\"\"\n        계좌에서 특정 금액을 출금합니다.\n        \n        :param amount: 출금하려는 금액\n        :type amount: float\n        :return: 출금이 성공했으면 True, 그렇지 않으면 False\n        :rtype: bool\n        \"\"\"\n        if not isinstance(amount, (int, float)):\n            raise TypeError(\"출금 금액이 int 또는 float 타입이어야 합니다.\")\n        if amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n```\n",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "deepseek-coder:6.7b",
+          "language": "python",
+          "scenario": "korean-docstring"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfn divide(a: f64, b: f64) -> f64 {\n    a / b\n}",
+          "instruction": "Add proper Result type error handling and documentation",
+          "rawResponse": "Here is your modified function with added error handling, better return types, and comments:\n\n```javascript\nfn divide(a: f64, b: f64) -> Result<f64, String>  { // Changed the return type to a Result enum that can either be Ok or Err\n    if (b == 0.0) {  // Added error handling for division by zero\n        return Err(\"Cannot divide by zero\".to_string());\n    } else {\n        return Ok(a / b);\n    }\n}\n```\n\nIn this code, we've changed the return type of `divide` to a `Result<f64, String>`. This means that instead of just returning a float (`f64`), it now returns either an `Ok` variant with a float value or an `Err` variant with a string error message in case of division by zero.\n\nThis is a common pattern for handling potential errors in Rust functions, where you want to explicitly handle the possibility of failure and communicate that failure through the return type system rather than using exceptions. This makes it easier to reason about your code because you know at compile time whether or not an error can occur. \n\nAlso added comments to explain what each part does for better understanding.\n",
+          "improvedSnippet": "if (b == 0.0) {  // Added error handling for division by zero\n        return Err(\"Cannot divide by zero\".to_string());\n    } else {\n        return Ok(a / b);\n    }",
+          "finalCode": "if (b == 0.0) {  // Added error handling for division by zero\n        return Err(\"Cannot divide by zero\".to_string());\n    } else {\n        return Ok(a / b);\n    }",
+          "model": "deepseek-coder:6.7b",
+          "language": "rust",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nstruct Person {\n    name: String,\n    age: u32,\n}\n\nfn process_person(person: Person) -> String {\n    format!(\"Name: {}, Age: {}\", person.name, person.age)\n}",
+          "instruction": "Optimize borrowing and add proper ownership handling",
+          "rawResponse": "Your original code is in Rust language. Here's how you can optimize it by properly managing borrows and ownership:\n\n```rust\nstruct Person {\n    name: String,\n    age: u32,\n}\n\n//  @command value\nfn process_person(person: &Person) -> String { // borrow person instead of taking ownership\n    format!(\"Name: {}, Age: {}\", person.name, person.age)\n}\n```\n\nIn this code, we are using a reference to the `Person` struct instead of taking ownership. This is more efficient as it avoids unnecessary memory allocation and copying for large data structures like `String`. The function now takes a borrowed reference (`&Person`) which allows us to use the same `Person` instance in multiple places without transferring ownership, but we still don't own the `Person` after passing it to this function.\n",
+          "improvedSnippet": "//  @command value",
+          "finalCode": "//  @command value",
+          "model": "deepseek-coder:6.7b",
+          "language": "rust",
+          "scenario": "ownership"
+        }
+      ],
+      "stats": {
+        "totalTests": 8,
+        "successCount": 8,
+        "successRate": 100,
+        "avgDuration": 0,
+        "languageStats": {
+          "javascript": {
+            "total": 3,
+            "success": 3
+          },
+          "python": {
+            "total": 3,
+            "success": 3
+          },
+          "rust": {
+            "total": 2,
+            "success": 2
+          }
+        },
+        "scenarioStats": {
+          "error-handling": {
+            "total": 2,
+            "success": 2
+          },
+          "async-await": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-comments": {
+            "total": 1,
+            "success": 1
+          },
+          "type-hints": {
+            "total": 1,
+            "success": 1
+          },
+          "exception-handling": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-docstring": {
+            "total": 1,
+            "success": 1
+          },
+          "ownership": {
+            "total": 1,
+            "success": 1
+          }
+        }
+      }
+    },
+    "starcoder2:3b": {
+      "model": "starcoder2:3b",
+      "type": "ollama",
+      "results": [
+        {
+          "success": true,
+          "originalCode": "\nfunction divide(a, b) {\n  return a / b;\n}",
+          "instruction": "Add comprehensive error handling and input validation",
+          "rawResponse": "\n\n```javascript\nfunction divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number')\n    throw new TypeError('Both arguments must be numbers');\n\n  return a / b;\n}\n```\n",
+          "improvedSnippet": "function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number')\n    throw new TypeError('Both arguments must be numbers');\n\n  return a / b;\n}",
+          "finalCode": "function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number')\n  throw new TypeError('Both arguments must be numbers');\n\n  return a / b;\n}",
+          "model": "starcoder2:3b",
+          "language": "javascript",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfunction fetchUserData(userId) {\n  return fetch('/api/users/' + userId)\n    .then(response => response.json())\n    .then(data => data);\n}",
+          "instruction": "Convert to async/await with proper error handling",
+          "rawResponse": "\n\n```javascript\nasync function fetchUserData(userId) {\n  try{\n    const response = await fetch('/api/users/' + userId);\n    return await response.json();\n  }catch (e){\n    console.log('Error', e);\n  }\n}\n```\n\n@command async/await\n",
+          "improvedSnippet": "async function fetchUserData(userId) {\n  try{\n    const response = await fetch('/api/users/' + userId);\n    return await response.json();\n  }catch (e){\n    console.log('Error', e);\n  }\n}",
+          "finalCode": "async function fetchUserData(userId) {\n  try {\n    const response = await fetch('/api/users/' + userId);\n    return await response.json();\n  } catch (e) {\n    console.log('Error', e);\n  }\n}",
+          "model": "starcoder2:3b",
+          "language": "javascript",
+          "scenario": "async-await"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass Calculator {\n  add(a, b) {\n    return a + b;\n  }\n  \n  multiply(a, b) {\n    return a * b;\n  }\n}",
+          "instruction": "한국어 주석과 JSDoc을 추가하고 에러 처리를 개선해주세요",
+          "rawResponse": "\n\n- [ ] add() 함수의 return 문은 `a + b`로 변경해주세요.\n- [ ] multiply() 함수의 return 문은 `a * b`로 변경해주세요.",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "starcoder2:3b",
+          "language": "javascript",
+          "scenario": "korean-comments"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+          "instruction": "Add type hints, memoization, and comprehensive docstring",
+          "rawResponse": "\n\n```javascript\n\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n```\n\n```python\n\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n```\n\n```python\n\ndef fibonacci(n, memo=None):\n    if not memo:\n        memo = {}\n\n    if n in memo.keys():\n        return memo[n]\n\n    if n <= 1:\n        return n\n\n    memo[n] = fibonacci(n - 1) + fibonacci(n - 2)\n    return memo[n]\n```\n\n```python\n\ndef fibonacci(n):\n    memo = {}\n\n    def fib_helper(n, memo=None):\n\n        if not memo:\n            memo = {}\n\n        if n in memo.keys():\n            return memo[n]\n\n        if n <= 1:\n            return n\n\n        memo[n] = fib_helper(n - 1) + fib_helper(n - 2)\n        return memo[n]\n\n    return fib_helper(n, memo=memo)\n```\n\n```python\n\ndef fibonacci(n):\n    memo = {}\n\n    def fib_helper(n, memo=None):\n\n        if not memo:\n            memo = {0: 1}\n\n        if n in memo.keys():\n            return memo[n]\n\n        if n <= 1:\n            return n\n\n        memo[n] = fib_helper(n - 1) + fib_helper(n - 2)\n        return memo[n]\n\n    return fib_helper(n, memo=memo)\n```\n\n",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "starcoder2:3b",
+          "language": "python",
+          "scenario": "type-hints"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef read_file(filename):\n    file = open(filename, 'r')\n    content = file.read()\n    file.close()\n    return content",
+          "instruction": "Add proper exception handling and use context managers",
+          "rawResponse": "\n\n```javascript\n\ndef read_file(filename):\n    try:\n        with open(filename, 'r') as file:\n            content = file.read()\n    except FileNotFoundError as e:\n        print(\"File not found\")\n    return content\n```\n",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "starcoder2:3b",
+          "language": "python",
+          "scenario": "exception-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n    \n    def deposit(self, amount):\n        self.balance += amount\n    \n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "instruction": "한국어 독스트링을 추가하고 타입 힌트와 에러 처리를 개선해주세요",
+          "rawResponse": "\n\n```python\nclass BankAccount:\n    def __init__(self, balance=0):\n        self._balance = balance\n    \n    def deposit(self, amount):\n        self._balance += amount\n    \n    def withdraw(self, amount):\n        if amount <= self._balance:\n            self._balance -= amount\n            return True\n        raise ValueError('Not enough money')\n```",
+          "improvedSnippet": "",
+          "finalCode": "",
+          "model": "starcoder2:3b",
+          "language": "python",
+          "scenario": "korean-docstring"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfn divide(a: f64, b: f64) -> f64 {\n    a / b\n}",
+          "instruction": "Add proper Result type error handling and documentation",
+          "rawResponse": "\n\n```javascript\nfn divide(a: f64, b: f64) -> Result<f64> {\n    if (b == 0.) {\n        return Err(0.);\n    } else {\n        a / b;\n    }\n}\n```",
+          "improvedSnippet": "if (b == 0.) {\n        return Err(0.);\n    } else {\n        a / b;\n    }",
+          "finalCode": "if (b == 0.) {\n        return Err(0.);\n    } else {\n        a / b;\n    }",
+          "model": "starcoder2:3b",
+          "language": "rust",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nstruct Person {\n    name: String,\n    age: u32,\n}\n\nfn process_person(person: Person) -> String {\n    format!(\"Name: {}, Age: {}\", person.name, person.age)\n}",
+          "instruction": "Optimize borrowing and add proper ownership handling",
+          "rawResponse": "\n\n```rust\nstruct Person {\n    name: String,\n    age: u32,\n}\n\nfn process_person(person: &Person) -> String {\n    // @command: replace_all_with_borrow_mut\n    let mut person = *person;\n\n    format!(\"Name: {}, Age: {}\", person.name, person.age)\n}\n```\n",
+          "improvedSnippet": "// @command: replace_all_with_borrow_mut",
+          "finalCode": "// @command: replace_all_with_borrow_mut",
+          "model": "starcoder2:3b",
+          "language": "rust",
+          "scenario": "ownership"
+        }
+      ],
+      "stats": {
+        "totalTests": 8,
+        "successCount": 8,
+        "successRate": 100,
+        "avgDuration": 0,
+        "languageStats": {
+          "javascript": {
+            "total": 3,
+            "success": 3
+          },
+          "python": {
+            "total": 3,
+            "success": 3
+          },
+          "rust": {
+            "total": 2,
+            "success": 2
+          }
+        },
+        "scenarioStats": {
+          "error-handling": {
+            "total": 2,
+            "success": 2
+          },
+          "async-await": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-comments": {
+            "total": 1,
+            "success": 1
+          },
+          "type-hints": {
+            "total": 1,
+            "success": 1
+          },
+          "exception-handling": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-docstring": {
+            "total": 1,
+            "success": 1
+          },
+          "ownership": {
+            "total": 1,
+            "success": 1
+          }
+        }
+      }
+    },
+    "qwen2.5-coder:7b": {
+      "model": "qwen2.5-coder:7b",
+      "type": "ollama",
+      "results": [
+        {
+          "success": true,
+          "originalCode": "\nfunction divide(a, b) {\n  return a / b;\n}",
+          "instruction": "Add comprehensive error handling and input validation",
+          "rawResponse": "```javascript\n// @params [a, b]\nasync divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both arguments must be numbers');\n  if (b === 0) throw new Error('Division by zero is not allowed');\n  return a / b;\n}\n```",
+          "improvedSnippet": "// @params [a, b]\nasync divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both arguments must be numbers');\n  if (b === 0) throw new Error('Division by zero is not allowed');\n  return a / b;\n}",
+          "finalCode": "// @params [a, b]\nasync;divide(a, b);{\n  if (typeof a !== 'number' || typeof b !== 'number') throw new Error('Both arguments must be numbers');\n  if (b === 0) throw new Error('Division by zero is not allowed');\n  return a / b;\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "javascript",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfunction fetchUserData(userId) {\n  return fetch('/api/users/' + userId)\n    .then(response => response.json())\n    .then(data => data);\n}",
+          "instruction": "Convert to async/await with proper error handling",
+          "rawResponse": "```javascript\n// @decorator validate\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID is required');\n  try {\n    const response = await fetch('/api/users/' + userId);\n    if (!response.ok) throw new Error('Failed to fetch user data');\n    return await response.json();\n  } catch (error) {\n    console.error('Error fetching user data:', error);\n    throw error;\n  }\n}\n```",
+          "improvedSnippet": "// @decorator validate\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID is required');\n  try {\n    const response = await fetch('/api/users/' + userId);\n    if (!response.ok) throw new Error('Failed to fetch user data');\n    return await response.json();\n  } catch (error) {\n    console.error('Error fetching user data:', error);\n    throw error;\n  }\n}",
+          "finalCode": "// @decorator validate\nasync function fetchUserData(userId) {\n  if (!userId) throw new Error('User ID is required');\n  try {\n    const response = await fetch('/api/users/' + userId);\n    if (!response.ok) throw new Error('Failed to fetch user data');\n    return await response.json();\n  } catch (error) {\n    console.error('Error fetching user data:', error);\n    throw error;\n  }\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "javascript",
+          "scenario": "async-await"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass Calculator {\n  add(a, b) {\n    return a + b;\n  }\n  \n  multiply(a, b) {\n    return a * b;\n  }\n}",
+          "instruction": "한국어 주석과 JSDoc을 추가하고 에러 처리를 개선해주세요",
+          "rawResponse": "```javascript\n/**\n * Adds two numbers.\n *\n * @param {number} a - The first number to add.\n * @param {number} b - The second number to add.\n * @returns {number} The sum of the two numbers.\n */\nadd(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both arguments must be numbers');\n  }\n  return a + b;\n}\n\n/**\n * Multiplies two numbers.\n *\n * @param {number} a - The first number to multiply.\n * @param {number} b - The second number to multiply.\n * @returns {number} The product of the two numbers.\n */\nmultiply(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both arguments must be numbers');\n  }\n  return a * b;\n}\n```",
+          "improvedSnippet": "add(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both arguments must be numbers');\n  }\n  return a + b;\n}",
+          "finalCode": "class TemporaryClass {add(a, b) {\n    if (typeof a !== 'number' || typeof b !== 'number') {\n      throw new Error('Both arguments must be numbers');\n    }\n    return a + b;\n  }}",
+          "model": "qwen2.5-coder:7b",
+          "language": "javascript",
+          "scenario": "korean-comments"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
+          "instruction": "Add type hints, memoization, and comprehensive docstring",
+          "rawResponse": "```javascript\n// @decorator memoize\n/**\n * Calculates the nth Fibonacci number using memoization to improve performance.\n * \n * @param {number} n - The position in the Fibonacci sequence.\n * @returns {number} - The nth Fibonacci number.\n * @throws {Error} - If the input is not a non-negative integer.\n */\nfunction fibonacci(n) {\n  if (typeof n !== 'number' || n < 0 || !Number.isInteger(n)) {\n    throw new Error('Input must be a non-negative integer');\n  }\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\n```",
+          "improvedSnippet": "// @decorator memoize\nfunction fibonacci(n) {\n  if (typeof n !== 'number' || n < 0 || !Number.isInteger(n)) {\n    throw new Error('Input must be a non-negative integer');\n  }\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+          "finalCode": "// @decorator memoize\nfunction fibonacci(n) {\n  if (typeof n !== 'number' || n < 0 || !Number.isInteger(n)) {\n    throw new Error('Input must be a non-negative integer');\n  }\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "python",
+          "scenario": "type-hints"
+        },
+        {
+          "success": true,
+          "originalCode": "\ndef read_file(filename):\n    file = open(filename, 'r')\n    content = file.read()\n    file.close()\n    return content",
+          "instruction": "Add proper exception handling and use context managers",
+          "rawResponse": "```javascript\n// @access public\nasync function read_file(filename) {\n  try {\n    const file = await fs.promises.open(filename, 'r');\n    const content = await file.readFile({ encoding: 'utf8' });\n    await file.close();\n    return content;\n  } catch (error) {\n    throw new Error(`Failed to read file: ${error.message}`);\n  }\n}\n```",
+          "improvedSnippet": "// @access public\nasync function read_file(filename) {\n  try {\n    const file = await fs.promises.open(filename, 'r');\n    const content = await file.readFile({ encoding: 'utf8' });\n    await file.close();\n    return content;\n  } catch (error) {\n    throw new Error(`Failed to read file: ${error.message}`);\n  }\n}",
+          "finalCode": "// @access public\nasync function read_file(filename) {\n  try {\n    const file = await fs.promises.open(filename, 'r');\n    const content = await file.readFile({ encoding: 'utf8' });\n    await file.close();\n    return content;\n  } catch (error) {\n    throw new Error(`Failed to read file: ${error.message}`);\n  }\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "python",
+          "scenario": "exception-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nclass BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n    \n    def deposit(self, amount):\n        self.balance += amount\n    \n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "instruction": "한국어 독스트링을 추가하고 타입 힌트와 에러 처리를 개선해주세요",
+          "rawResponse": "```javascript\n/**\n * Represents a bank account with basic operations.\n */\nclass BankAccount {\n    /**\n     * Initializes a new instance of the BankAccount class.\n     * @param {number} [balance=0] - The initial balance of the account.\n     */\n    constructor(balance = 0) {\n        this.balance = balance;\n    }\n\n    /**\n     * Deposits a specified amount into the bank account.\n     * @param {number} amount - The amount to deposit.\n     */\n    deposit(amount) {\n        if (typeof amount !== 'number' || amount <= 0) throw new Error('Amount must be a positive number');\n        this.balance += amount;\n    }\n\n    /**\n     * Withdraws a specified amount from the bank account if sufficient balance exists.\n     * @param {number} amount - The amount to withdraw.\n     * @returns {boolean} True if the withdrawal is successful, otherwise false.\n     */\n    withdraw(amount) {\n        if (typeof amount !== 'number' || amount <= 0) throw new Error('Amount must be a positive number');\n        if (amount > this.balance) return false;\n        this.balance -= amount;\n        return true;\n    }\n}\n```",
+          "improvedSnippet": "constructor(balance = 0) {\n        this.balance = balance;\n    }",
+          "finalCode": "constructor(balance = 0) {\n        this.balance = balance;\n    }",
+          "model": "qwen2.5-coder:7b",
+          "language": "python",
+          "scenario": "korean-docstring"
+        },
+        {
+          "success": true,
+          "originalCode": "\nfn divide(a: f64, b: f64) -> f64 {\n    a / b\n}",
+          "instruction": "Add proper Result type error handling and documentation",
+          "rawResponse": "```javascript\n// @params [a: number, b: number]\n// @return Promise<number>\nasync function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both parameters must be numbers');\n  }\n  if (b === 0) {\n    throw new Error('Division by zero is not allowed');\n  }\n  return a / b;\n}\n```",
+          "improvedSnippet": "// @params [a: number, b: number]\n// @return Promise<number>\nasync function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both parameters must be numbers');\n  }\n  if (b === 0) {\n    throw new Error('Division by zero is not allowed');\n  }\n  return a / b;\n}",
+          "finalCode": "// @params [a: number, b: number]\n// @return Promise<number>\nasync function divide(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Both parameters must be numbers');\n  }\n  if (b === 0) {\n    throw new Error('Division by zero is not allowed');\n  }\n  return a / b;\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "rust",
+          "scenario": "error-handling"
+        },
+        {
+          "success": true,
+          "originalCode": "\nstruct Person {\n    name: String,\n    age: u32,\n}\n\nfn process_person(person: Person) -> String {\n    format!(\"Name: {}, Age: {}\", person.name, person.age)\n}",
+          "instruction": "Optimize borrowing and add proper ownership handling",
+          "rawResponse": "```javascript\n// @params [person]\nfunction processPerson(person) {\n  if (!person || typeof person !== 'object' || !person.name || typeof person.age !== 'number') {\n    throw new Error('Invalid person object');\n  }\n  return `Name: ${person.name}, Age: ${person.age}`;\n}\n```",
+          "improvedSnippet": "// @params [person]\nfunction processPerson(person) {\n  if (!person || typeof person !== 'object' || !person.name || typeof person.age !== 'number') {\n    throw new Error('Invalid person object');\n  }\n  return `Name: ${person.name}, Age: ${person.age}`;\n}",
+          "finalCode": "// @params [person]\nfunction processPerson(person) {\n  if (!person || typeof person !== 'object' || !person.name || typeof person.age !== 'number') {\n    throw new Error('Invalid person object');\n  }\n  return `Name: ${person.name}, Age: ${person.age}`;\n}",
+          "model": "qwen2.5-coder:7b",
+          "language": "rust",
+          "scenario": "ownership"
+        }
+      ],
+      "stats": {
+        "totalTests": 8,
+        "successCount": 8,
+        "successRate": 100,
+        "avgDuration": 0,
+        "languageStats": {
+          "javascript": {
+            "total": 3,
+            "success": 3
+          },
+          "python": {
+            "total": 3,
+            "success": 3
+          },
+          "rust": {
+            "total": 2,
+            "success": 2
+          }
+        },
+        "scenarioStats": {
+          "error-handling": {
+            "total": 2,
+            "success": 2
+          },
+          "async-await": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-comments": {
+            "total": 1,
+            "success": 1
+          },
+          "type-hints": {
+            "total": 1,
+            "success": 1
+          },
+          "exception-handling": {
+            "total": 1,
+            "success": 1
+          },
+          "korean-docstring": {
+            "total": 1,
+            "success": 1
+          },
+          "ownership": {
+            "total": 1,
+            "success": 1
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "rankings": {
+      "overall": [
+        {
+          "model": "deepseek-coder:6.7b",
+          "successRate": 100,
+          "avgDuration": 0
+        },
+        {
+          "model": "starcoder2:3b",
+          "successRate": 100,
+          "avgDuration": 0
+        },
+        {
+          "model": "qwen2.5-coder:7b",
+          "successRate": 100,
+          "avgDuration": 0
+        }
+      ]
+    },
+    "bestPerLanguage": {
+      "javascript": {
+        "model": "deepseek-coder:6.7b",
+        "successRate": 100
+      },
+      "python": {
+        "model": "deepseek-coder:6.7b",
+        "successRate": 100
+      },
+      "rust": {
+        "model": "deepseek-coder:6.7b",
+        "successRate": 100
+      }
+    },
+    "bestPerScenario": {},
+    "koreanPerformance": {}
+  }
+}
